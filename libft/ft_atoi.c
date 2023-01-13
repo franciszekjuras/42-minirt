@@ -3,39 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas < jkarosas@student.42wolfsburg.de +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/01 11:43:44 by jkarosas          #+#    #+#             */
-/*   Updated: 2021/12/01 11:51:35 by jkarosas         ###   ########.fr       */
+/*   Created: 2022/02/28 16:07:34 by fjuras            #+#    #+#             */
+/*   Updated: 2022/03/16 13:44:18 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *nptr)
+static int	ft_atoi_ll(const char *np, int i, int s, int base)
 {
-	int	sum;
-	int	i;
-	int	negative;
+	int	r;
 
+	i--;
+	r = 0;
+	while (i >= 0)
+	{
+		r += s * (np[i] - '0');
+		s *= base;
+		i--;
+	}
+	return (r);
+}
+
+int	ft_atoi(const char *np)
+{
+	int	s;
+	int	i;
+
+	while (ft_isspace(*np))
+		np++;
+	s = 1;
+	if (*np == '-')
+		s = -1;
+	if (*np == '-' || *np == '+')
+		np++;
 	i = 0;
-	negative = 0;
-	while (nptr[i] == '\t' || nptr[i] == '\n' || nptr[i] == '\v'
-		|| nptr[i] == '\f' || nptr[i] == '\r' || nptr[i] == ' ')
+	while (ft_isdigit(np[i]))
 		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
-	{
-		if (nptr[i] == '-')
-			negative = -1;
-		i++;
-	}
-	sum = 0;
-	while (nptr[i] >= '0' && nptr[i] <= '9')
-	{
-		sum = sum * 10 + (nptr[i] - '0');
-		i++;
-	}
-	if (negative < 0)
-		sum = sum * -1;
-	return (sum);
+	return (ft_atoi_ll(np, i, s, 10));
 }

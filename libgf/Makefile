@@ -1,0 +1,33 @@
+NAME = libgf.a
+
+FILES = \
+	gf_camera gf_color gf_grad \
+	gf_strtodouble \
+	gf_vector gf_vector2 gf_vector3 \
+	cplx cplx2 cplx3
+
+OFILES = $(FILES:%=%.o)
+
+CFLAGS = -Wall -Wextra -Werror
+
+OPTIM = -O3
+
+INC = -I. -I..
+
+all: $(NAME)
+
+$(NAME): $(OFILES)
+	ar rcs $@ $?
+
+$(OFILES): %.o: %.c
+	gcc $(CFLAGS) $(OPTIM) $(INC) -c $< -o $@
+
+clean:
+	rm -f $(OFILES)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+
+.PHONY: clean fclean re

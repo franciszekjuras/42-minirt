@@ -1,0 +1,4 @@
+minirt
+*.code-workspace
+*.o
+*.a

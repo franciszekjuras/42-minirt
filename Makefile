@@ -1,48 +1,63 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/12 13:20:00 by jkarosas          #+#    #+#              #
-#    Updated: 2023/01/12 14:42:37 by jkarosas         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME = minirt
 
-NAME		= miniRt
+MAIN_ALL := main main2
+MAIN := main2
 
-SRC			=	src/main.c src/parser.c src/parser_utils.c src/get_next_line.c \
-				src/get_next_line_utils.c src/free_scene.c src/parse_objects.c \
-				src/parse_parameters.c src/parse_lighting.c 
+FILES = \
+	$(MAIN) \
+	free_scene parser parser_utils parse_lighting parse_objects \
+	parse_parameters get_next_line get_next_line_utils
 
-OBJ			= ${SRC:.c=.o}
+HEADERS= \
+	minirt input parser get_next_line
 
-CC			= gcc
-FLAGS		= -Wall -Wextra -Werror
-LFLAGS		= -L libft
+OFILES = $(FILES:%=src/%.o)
+HFILES = $(HEADERS:%=inc/%.h)
+OMAIN_ALL = $(MAIN_ALL:%=src/%.o)
+CFLAGS = -Wall -Wextra -Werror
+OPTIM = -O3
+export OPTIM
+INC = -I. -I./inc -I./mlx/include
+LIBS= -lgf -lft -lmlx42 -ldl -lglfw -lm
+LIBS_FILES = libft/libft.a libgf/libgf.a mlx/libmlx42.a
+LIBS_DIRS = $(addprefix -L, $(dir $(LIBS_FILES)))
 
-INC			= -I ./inc -I ./libft
-LIB			= libft/libft.a
+all: $(NAME)
 
-all:		${NAME}
+$(NAME): $(OFILES) $(LIBS_FILES)
+	gcc $(LIBS_DIRS) $(OFILES) $(LIBS) -o $@
 
-${NAME}:	${OBJ}
-			make -s -C libft
-			make bonus -s -C libft
-			${CC} ${FLAGS} ${LFLAGS} ${OBJ} -o ${NAME} ${LIB} -lft
+$(OFILES): %.o: %.c $(HFILES)
+	gcc $(CFLAGS) $(OPTIM) $(INC) -c $< -o $@
 
-.c.o:
-			${CC} ${CFLAGS} ${INC} -c $< -o ${<:.c=.o}
+$(LIBS_FILES): FORCE
+	make -C $(dir $@)
 
-clean:
-			make clean -s -C libft
-			rm -rf ${OBJ}
+FORCE: ;
 
-fclean:		clean
-			make fclean -s -C libft
-			rm -rf ${NAME}
+clean_:
+	rm -f $(OFILES) $(OMAIN_ALL)
 
-re:			fclean all
+clean: clean_libs clean_
 
-.PHONY:		all clean fclean re
+fclean_: clean_
+	rm -f $(NAME)
+
+fclean: fclean_ clean
+	rm -f $(LIBS_FILES)
+
+re_: fclean_ all
+
+re: re_libs re_
+
+clean_libs:
+	make clean -C libft
+	make clean -C libgf
+	make clean -C mlx
+
+re_libs:
+	make re -C libft
+	make re -C libgf
+	make re -C mlx
+
+.PHONY: all clean clean_ fclean fclean_ re re_ re_libs clean_libs FORCE

@@ -3,54 +3,70 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas < jkarosas@student.42wolfsburg.de +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/01 11:44:42 by jkarosas          #+#    #+#             */
-/*   Updated: 2021/12/01 11:51:35 by jkarosas         ###   ########.fr       */
+/*   Created: 2022/02/28 16:07:34 by fjuras            #+#    #+#             */
+/*   Updated: 2022/03/16 14:22:05 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_length(int n)
+char	ft_numtochar(int n)
 {
-	size_t	length;
-
-	length = 0;
-	if (n <= 0)
-		length = 1;
-	while (n != 0)
-	{
-		n = n / 10;
-		length++;
-	}
-	return (length);
+	if (n < 0 || n > 36)
+		return ('#');
+	if (n <= 9)
+		return ('0' + n);
+	return ('a' + (n - 10));
 }
 
 char	*ft_itoa(int n)
 {
-	char	*a;
-	size_t	len;
-	long	num;	
+	char			buf[20];
+	unsigned int	un;
+	int				i;
 
-	len = ft_length(n);
-	a = (char *)malloc(len + 1);
-	if (a == NULL)
-		return (NULL);
-	num = n;
-	if (n < 0)
+	un = ft_absu(n);
+	i = 20 - 1;
+	buf[i--] = 0;
+	while (un != 0)
 	{
-		num = -num;
-		a[0] = '-';
+		buf[i--] = '0' + un % 10;
+		un /= 10;
 	}
-	if (num == 0)
-		a[0] = '0';
-	a[len] = '\0';
-	while (num != 0)
+	if (n == 0)
+		buf[i--] = '0';
+	else if (n < 0)
+		buf[i--] = '-';
+	i++;
+	return (ft_strdup(buf + i));
+}
+
+char	*ft_lltoa_base_buf(long long n, int base, char *buf, int size)
+{
+	unsigned long long	un;
+	char				*pos;
+
+	un = ft_absull(n);
+	pos = ft_ulltoa_base_buf(un, base, buf, size);
+	if (pos > buf && n < 0)
+		*(--pos) = '-';
+	return (pos);
+}
+
+char	*ft_ulltoa_base_buf(unsigned long long n, int base, char *buf, int size)
+{
+	char	*pos;
+
+	pos = buf + size - 1;
+	*(--pos) = '\0';
+	if (n == 0)
+		*(--pos) = '0';
+	while (n != 0 && pos >= buf)
 	{
-		a[len - 1] = (num % 10) + '0';
-		num = num / 10;
-		len--;
+		*(--pos) = ft_numtochar(n % base);
+		n /= base;
 	}
-	return (a);
+	return (pos);
 }

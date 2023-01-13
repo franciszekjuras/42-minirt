@@ -3,30 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas < jkarosas@student.42wolfsburg.de +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/01 11:45:59 by jkarosas          #+#    #+#             */
-/*   Updated: 2021/12/01 11:51:35 by jkarosas         ###   ########.fr       */
+/*   Created: 2022/02/28 12:06:21 by fjuras            #+#    #+#             */
+/*   Updated: 2022/02/28 15:18:11 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stddef.h>
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t	i;
-	char	*a;
-	char	*b;
+	size_t				i;
+	unsigned char		*d;
+	const unsigned char	*s;
 
-	if (!dest)
-		return (NULL);
+	d = (unsigned char *) dst;
+	s = (const unsigned char *) src;
 	i = 0;
-	a = (char *)dest;
-	b = (char *)src;
-	while (i < n)
+	if (dst < src)
 	{
-		*a++ = *b++;
-		i++;
-	}	
-	return (dest);
+		while (i < len)
+		{
+			d[i] = s[i];
+			i++;
+		}
+	}
+	else if (dst > src)
+	{
+		while (i < len)
+		{
+			d[len - i - 1] = s[len - i - 1];
+			i++;
+		}
+	}
+	return (dst);
+}
+
+void	*ft_memcpy(void *dst, const void *src, size_t len)
+{
+	return (ft_memmove(dst, src, len));
+}
+
+void	*ft_memccpy(void *dst, const void *src, int c, size_t len)
+{
+	const void	*src_pos;
+	size_t		copy_len;
+
+	src_pos = ft_memchr(src, c, len);
+	if (src_pos == 0)
+		copy_len = len;
+	else
+		copy_len = (src_pos - src + 1);
+	ft_memmove(dst, src, copy_len);
+	if (src_pos == 0)
+		return (0);
+	return (dst + copy_len);
 }

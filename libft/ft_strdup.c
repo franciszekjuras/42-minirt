@@ -3,34 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas < jkarosas@student.42wolfsburg.de +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/01 11:49:31 by jkarosas          #+#    #+#             */
-/*   Updated: 2021/12/01 11:51:35 by jkarosas         ###   ########.fr       */
+/*   Created: 2022/02/28 17:55:08 by fjuras            #+#    #+#             */
+/*   Updated: 2022/04/25 19:58:06 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup(const char *str)
 {
-	char	*a;
-	size_t	i;
+	size_t	str_size;
+	char	*dup;
 
-	i = 0;
-	if (!s)
-		return (NULL);
-	while (s[i])
-		i++;
-	a = (char *)malloc(sizeof(*s) * (i + 1));
-	if (!a)
-		return (NULL);
-	i = 0;
-	while (s[i])
-	{
-		a[i] = s[i];
-		i++;
-	}
-	a[i] = 0;
-	return (a);
+	str_size = ft_strlen(str) + 1;
+	dup = malloc(str_size);
+	if (dup == 0)
+		return (0);
+	ft_memcpy(dup, str, str_size);
+	return (dup);
+}
+
+char	*ft_strndup(const char *str, size_t len)
+{
+	char	*dup;
+
+	len = ft_strnlen(str, len);
+	dup = malloc(len + 1);
+	if (dup == 0)
+		return (0);
+	ft_memcpy(dup, str, len);
+	dup[len] = '\0';
+	return (dup);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	return (ft_strndup(s + ft_strnlen(s, start), len));
 }

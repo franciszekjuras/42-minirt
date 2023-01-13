@@ -1,54 +1,34 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jkarosas < jkarosas@student.42wolfsburg.de +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/11/22 19:08:45 by jkarosas          #+#    #+#              #
-#    Updated: 2021/11/22 19:08:45 by jkarosas         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME = libft.a
 
+FILES = \
+	ft_alloc ft_mapi ft_math ft_math2 ft_membase ft_memcmp ft_memcpy ft_put \
+	ft_strbase ft_strcase ft_strcmp ft_strcpy ft_strdup ft_stris \
+	ft_stris2 ft_strmpl ft_putn ft_strtoll_e ft_strtoll_e_utils \
+	ft_strtoull_e ft_strtonum ft_atoi ft_itoa ft_swap \
+	ft_get_next_line ft_get_next_line_utils \
+	ft_printf ft_parse_format ft_put_format ft_putnbr_format \
+	ft_argparse ft_strtofp \
+	ft_lstadd_back ft_lstadd_front ft_lstclear ft_lstdelone \
+	ft_lstiter ft_lstlast ft_lstmap ft_lstnew ft_lstsize
 
-SRCS		= 	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_memchr.c \
-				ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c \
-				ft_split.c ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c \
-				ft_strncmp.c ft_strnstr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c ft_strrchr.c
+OFILES = $(FILES:%=%.o)
 
-OBJS		= ${SRCS:.c=.o}
+CFLAGS = -Wall -Wextra -Werror
 
-BONUS		=	ft_lstadd_back.c ft_lstadd_front.c \
-				ft_lstlast.c ft_lstdelone.c ft_lstclear.c\
-				ft_lstnew.c ft_lstsize.c ft_lstiter.c ft_lstmap.c
+all: $(NAME)
 
-BONUS_OBJS		= $(BONUS:.c=.o)
+$(NAME): $(OFILES)
+	ar rcs $@ $?
 
-CC			= gcc
-RM			= rm -f
-AR			= ar rc
-
-CFLAGS		= -Wall -Wextra -Werror
-
-NAME		= libft.a
-
-.c.o:
-			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
-
-$(NAME):	${OBJS}
-			${AR} ${NAME} ${OBJS}
-
-all:		$(NAME)
+$(OFILES): %.o: %.c
+	gcc $(CFLAGS) $(OPTIM) -c $< -o $@
 
 clean:
-			${RM} ${OBJS} $(BONUS_OBJS)
+	rm -f $(OFILES)
 
-fclean:		clean
-			${RM} $(NAME)
+fclean: clean
+	rm -f $(NAME)
 
-re:			fclean all
+re: fclean all
 
-bonus:		$(OBJS) $(BONUS_OBJS)
-			ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
-
-.PHONY:		all clean fclean re bonus
+.PHONY: clean fclean re

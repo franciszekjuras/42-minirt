@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:32:40 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/12 14:54:24 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/13 22:12:39 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "input.h"
 # include "get_next_line.h"
+# include <libft/libft.h>
 
 // parser.c
 t_scene	*parser(char *filename);
