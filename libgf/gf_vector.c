@@ -12,9 +12,9 @@
 
 #include "gf.h"
 
-t_gf_vec3	gf_vec3(double x, double y, double z)
+t_v3	v3(double x, double y, double z)
 {
-	t_gf_vec3	v;
+	t_v3	v;
 
 	v.x = x;
 	v.y = y;
@@ -22,7 +22,7 @@ t_gf_vec3	gf_vec3(double x, double y, double z)
 	return (v);
 }
 
-t_gf_vec3	gf_vec3_neg(t_gf_vec3 v)
+t_v3	v3_neg(t_v3 v)
 {
 	v.x = -v.x;
 	v.y = -v.y;
@@ -30,7 +30,7 @@ t_gf_vec3	gf_vec3_neg(t_gf_vec3 v)
 	return (v);
 }
 
-t_gf_vec3	gf_vec3_sub(t_gf_vec3 v1, t_gf_vec3 v2)
+t_v3	v3_sub(t_v3 v1, t_v3 v2)
 {
 	v1.x -= v2.x;
 	v1.y -= v2.y;
@@ -38,7 +38,7 @@ t_gf_vec3	gf_vec3_sub(t_gf_vec3 v1, t_gf_vec3 v2)
 	return (v1);
 }
 
-t_gf_vec3	gf_vec3_add(t_gf_vec3 v1, t_gf_vec3 v2)
+t_v3	v3_add(t_v3 v1, t_v3 v2)
 {
 	v1.x += v2.x;
 	v1.y += v2.y;
@@ -46,7 +46,7 @@ t_gf_vec3	gf_vec3_add(t_gf_vec3 v1, t_gf_vec3 v2)
 	return (v1);
 }
 
-t_gf_vec3	gf_vec3_mult(t_gf_vec3 v, double m)
+t_v3	v3_mult(t_v3 v, double m)
 {
 	v.x *= m;
 	v.y *= m;

@@ -38,9 +38,9 @@ int		parse_light(t_scene *scene, char **line);
 int		parse_ambient_lighting(t_scene *scene, char **line);
 
 // parse_parameters.c
-int		parse_coordinates(t_gf_vec3 *point, char *line);
-int		parse_orientation(t_gf_vec3 *point, char *line);
-int		parse_color(t_gf_vec3 *color, char *line);
+int		parse_coordinates(t_v3 *point, char *line);
+int		parse_orientation(t_v3 *point, char *line);
+int		parse_color(t_v3 *color, char *line);
 
 // free_scene.c
 void	free_scene(t_scene *scene);

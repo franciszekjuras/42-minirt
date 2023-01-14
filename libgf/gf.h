@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:41:47 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/14 18:24:11 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/14 18:51:30 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,23 @@ typedef struct s_gf_point
 	int	y;
 }	t_gf_point;
 
-typedef struct s_gf_vec3
+typedef struct s_v3
 {
 	double	x;
 	double	y;
 	double	z;
-}	t_gf_vec3;
+}	t_v3;
 
 typedef struct s_gf_camera
 {
-	t_gf_vec3	pos;
-	t_gf_vec3	x;
-	t_gf_vec3	y;
-	t_gf_vec3	z;
-	double		fov;
-	double		fov_scale_px;
-	int			mid_height_px;
-	int			mid_width_px;
+	t_v3	pos;
+	t_v3	x;
+	t_v3	y;
+	t_v3	z;
+	double	fov;
+	double	fov_scale_px;
+	int		mid_height_px;
+	int		mid_width_px;
 }	t_gf_camera;
 
 typedef struct s_gf_color
@@ -73,23 +73,23 @@ double		gf_strtodouble(char **npp);
 t_gf_grad	gf_grad(t_gf_color beg, t_gf_color end, double ibeg, double iend);
 t_gf_color	gf_color_grad(double i, t_gf_grad *grad);
 /*gf_vector.c*/
-t_gf_vec3	gf_vec3(double x, double y, double z);
-t_gf_vec3	gf_vec3_neg(t_gf_vec3 v);
-t_gf_vec3	gf_vec3_sub(t_gf_vec3 v1, t_gf_vec3 v2);
-t_gf_vec3	gf_vec3_add(t_gf_vec3 v1, t_gf_vec3 v2);
-t_gf_vec3	gf_vec3_mult(t_gf_vec3 v, double m);
-double		gf_vec3_dot(t_gf_vec3 v1, t_gf_vec3 v2);
-t_gf_vec3	gf_vec3_cross(t_gf_vec3 v1, t_gf_vec3 v2);
-double		gf_vec3_len(t_gf_vec3 v);
-t_gf_vec3	gf_vec3_norm(t_gf_vec3 v);
-void		gf_vec3_ineg(t_gf_vec3 *v);
-void		gf_vec3_isub(t_gf_vec3 *v1, t_gf_vec3 v2);
-void		gf_vec3_iadd(t_gf_vec3 *v1, t_gf_vec3 v2);
-void		gf_vec3_imult(t_gf_vec3 *v, double m);
+t_v3		v3(double x, double y, double z);
+t_v3		v3_neg(t_v3 v);
+t_v3		v3_sub(t_v3 v1, t_v3 v2);
+t_v3		v3_add(t_v3 v1, t_v3 v2);
+t_v3		v3_mult(t_v3 v, double m);
+double		v3_dot(t_v3 v1, t_v3 v2);
+t_v3		v3_cross(t_v3 v1, t_v3 v2);
+double		v3_len(t_v3 v);
+t_v3		v3_norm(t_v3 v);
+void		v3_ineg(t_v3 *v);
+void		v3_isub(t_v3 *v1, t_v3 v2);
+void		v3_iadd(t_v3 *v1, t_v3 v2);
+void		v3_imult(t_v3 *v, double m);
 /*gf_camera.c*/
-t_gf_camera	gf_camera_new(double fov, t_gf_vec3 pos, t_gf_vec3 dir);
+t_gf_camera	gf_camera_new(double fov, t_v3 pos, t_v3 dir);
 void		gf_camera_set_res(t_gf_camera *cam, int width_px, int height_px);
-t_gf_vec3	gf_camera_ray(t_gf_camera *cam, int x_px, int y_px);
+t_v3		gf_camera_ray(t_gf_camera *cam, int x_px, int y_px);
 /*gf_utils.c*/
 double		gf_sq(double v);
 

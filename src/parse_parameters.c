@@ -12,7 +12,7 @@
 
 #include "parser.h"
 
-int	parse_coordinates(t_gf_vec3 *point, char *line)
+int	parse_coordinates(t_v3 *point, char *line)
 {
 	char	**split;
 
@@ -29,7 +29,7 @@ int	parse_coordinates(t_gf_vec3 *point, char *line)
 	return (0);
 }
 
-int	parse_orientation(t_gf_vec3 *point, char *line)
+int	parse_orientation(t_v3 *point, char *line)
 {
 	char	**split;
 
@@ -53,7 +53,7 @@ int	parse_orientation(t_gf_vec3 *point, char *line)
 	return (0);
 }
 
-int	parse_color(t_gf_vec3 *color, char *line)
+int	parse_color(t_v3 *color, char *line)
 {
 	char	**split;
 
