@@ -1,26 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   gf_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 21:17:37 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/14 17:49:09 by fjuras           ###   ########.fr       */
+/*   Created: 2023/01/14 18:22:56 by fjuras            #+#    #+#             */
+/*   Updated: 2023/01/14 18:23:38 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
-
-# include <MLX42/MLX42.h>
-# include <libgf/gf.h>
-
-typedef struct s_data
+double	gf_sq(double v)
 {
-	mlx_t		*mlx;
-	mlx_image_t	*canvas;
-	t_gf_camera	cam;
-}	t_data;
-
-#endif
+	return (v * v);
+}

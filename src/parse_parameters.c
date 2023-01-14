@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_parameters.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:06:11 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/12 15:19:02 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/14 17:45:41 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int	parse_coordinates(t_vec3 *point, char *line)
+int	parse_coordinates(t_gf_vec3 *point, char *line)
 {
 	char	**split;
 
@@ -29,7 +29,7 @@ int	parse_coordinates(t_vec3 *point, char *line)
 	return (0);
 }
 
-int	parse_orientation(t_vec3 *point, char *line)
+int	parse_orientation(t_gf_vec3 *point, char *line)
 {
 	char	**split;
 
@@ -53,7 +53,7 @@ int	parse_orientation(t_vec3 *point, char *line)
 	return (0);
 }
 
-int	parse_color(t_vec3 *color, char *line)
+int	parse_color(t_gf_vec3 *color, char *line)
 {
 	char	**split;
 

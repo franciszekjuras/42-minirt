@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:41:47 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/13 17:53:46 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/14 18:24:11 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,7 @@ void		gf_vec3_imult(t_gf_vec3 *v, double m);
 t_gf_camera	gf_camera_new(double fov, t_gf_vec3 pos, t_gf_vec3 dir);
 void		gf_camera_set_res(t_gf_camera *cam, int width_px, int height_px);
 t_gf_vec3	gf_camera_ray(t_gf_camera *cam, int x_px, int y_px);
+/*gf_utils.c*/
+double		gf_sq(double v);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:55:15 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/13 21:50:14 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/14 17:49:44 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,71 +17,64 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-
+# include <libgf/gf.h>
 # include <libft/libft.h>
-
-// Vector ------------------------------------
-
-typedef struct s_vec3
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_vec3;
 
 // Camera and lighting -----------------------
 
 typedef struct s_camera
 {
-	t_vec3	origin;
-	t_vec3	orientation;
-	int		fov;
+	t_gf_vec3	origin;
+	t_gf_vec3	orientation;
+	int			fov;
 }	t_camera;
 
 typedef struct s_light
 {
-	t_vec3	origin;
-	double	brightness;
+	t_gf_vec3	origin;
+	double		brightness;
 }	t_light;
 
 typedef struct s_ambient
 {
-	t_vec3	color;
-	double	brightness;
+	t_gf_vec3	color;
+	double		brightness;
 }	t_ambient;
 
 // Objects -----------------------------------
 
 typedef struct s_plane
 {
-	t_vec3	origin;
-	t_vec3	orientation;
+	t_gf_vec3	origin;
+	t_gf_vec3	orientation;
 }	t_plane;
 
 typedef struct s_sphere
 {
-	t_vec3	origin;
-	double	radius;
+	t_gf_vec3	origin;
+	double		radius;
 }	t_sphere;
 
 typedef struct s_cylinder
 {
-	t_vec3	origin;
-	t_vec3	orientation;
-	double	radius;
-	double	height;
+	t_gf_vec3	origin;
+	t_gf_vec3	orientation;
+	double		radius;
+	double		height;
 }	t_cylinder;
 
 typedef enum e_type
 {
-	PLANE, SPHERE, CYLINDER
+	PLANE,
+	SPHERE,
+	CYLINDER
 }	t_type;
 
 typedef struct s_object
 {
-	void	*content;
-	t_vec3	color;
-	t_type	type;
+	void		*content;
+	t_gf_vec3	color;
+	t_type		type;
 }	t_object;
 
 // Scene -------------------------------------

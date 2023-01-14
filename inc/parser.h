@@ -6,12 +6,12 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:32:40 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/13 22:12:39 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/14 17:48:41 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-# define PARSE_H
+#ifndef PARSER_H
+# define PARSER_H
 
 # include "input.h"
 # include "get_next_line.h"
@@ -38,9 +38,9 @@ int		parse_light(t_scene *scene, char **line);
 int		parse_ambient_lighting(t_scene *scene, char **line);
 
 // parse_parameters.c
-int		parse_coordinates(t_vec3 *point, char *line);
-int		parse_orientation(t_vec3 *point, char *line);
-int		parse_color(t_vec3 *color, char *line);
+int		parse_coordinates(t_gf_vec3 *point, char *line);
+int		parse_orientation(t_gf_vec3 *point, char *line);
+int		parse_color(t_gf_vec3 *color, char *line);
 
 // free_scene.c
 void	free_scene(t_scene *scene);
