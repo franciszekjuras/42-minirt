@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:41:47 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/14 18:51:30 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/14 19:52:52 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,16 @@ typedef struct s_gf_camera
 	int		mid_width_px;
 }	t_gf_camera;
 
+/**
+ * r, g, b fields are in [0, 255] range
+ * a (alpha channel) is [0, 1], 0 is transparent, 1 is opaque
+ */
 typedef struct s_gf_color
 {
-	int	b;
-	int	g;
-	int	r;
-	int	a;
+	double	r;
+	double	g;
+	double	b;
+	double	a;
 }	t_gf_color;
 
 typedef struct s_gf_grad
@@ -64,9 +68,8 @@ typedef struct s_gf_grad
 
 /*gf_color.c*/
 int			gf_ctoi(t_gf_color color);
-t_gf_color	gf_rgb(int r, int g, int b);
-t_gf_color	gf_hsl(double h, double s, double l);
-t_gf_color	gf_hsv(double h, double s, double v);
+t_gf_color	gf_rgb(double r, double g, double b);
+t_gf_color	gf_color_mult(t_gf_color color, double mult);
 /*gf_strtodouble.c*/
 double		gf_strtodouble(char **npp);
 /*gf_grad.c*/

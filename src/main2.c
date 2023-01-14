@@ -6,11 +6,12 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:38:30 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/14 18:49:45 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/14 20:00:14 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <math.h>
 #include <MLX42/MLX42.h>
 #include <libft/libft.h>
 #include <libgf/gf.h>
@@ -22,25 +23,66 @@
 // 	fprintf(stderr, "%s(%lf, %lf, %lf)%s", prefix, v.x, v.y, v.z, postfix);
 // }
 
+double	quad_smaller_pos_sol(double const_term, double sign_term)
+{
+	double	sol1;
+	double	sol2;
+
+	sol1 = const_term - sign_term;
+	sol2 = const_term + sign_term;
+	if (sol1 < sol2)
+	{
+		if (sol1 > 0)
+			return (sol1);
+		else
+			return (sol2);
+	}
+	else
+	{
+		if (sol2 > 0)
+			return (sol2);
+		else
+			return (sol1);
+	}
+}
+
+double	shader(t_data *data, t_v3 d, t_v3 n)
+{
+	(void)data;
+	(void)d;
+	(void)n;
+	return (0.2 - v3_dot(d, n));
+}
+
 t_gf_color	cast_ray(t_data *data, t_v3 o, t_v3 d)
 {
 	t_sphere	sphere;
 	t_v3		c;
 	t_v3		x;
+	t_v3		p_c;
+	t_v3		normal;
 	double		r;
-	double		del_sq;
+	double		delta;
+	double		t;
+	double		b2;
+	double		shade;
 
-	(void) data;
 	sphere.origin = v3(0., 0., 0.);
 	sphere.radius = 2.;
 	c = sphere.origin;
 	r = sphere.radius;
 	x = v3_sub(o, c);
-	del_sq = 4. * (gf_sq(v3_dot(d, x)) - (v3_dot(x, x) - gf_sq(r)));
-	if (del_sq > 0.)
-		return (gf_rgb(200, 200, 200));
-	else
-		return (gf_rgb(10, 10, 10));
+	b2 = v3_dot(d, x);
+	delta = 4. * (gf_sq(b2) - (v3_dot(x, x) - gf_sq(r)));
+	if (delta <= 0.)
+		return (gf_rgb(0, 0, 0));
+	t = quad_smaller_pos_sol(-b2, sqrt(delta) / 2.);
+	if (t <= 0.)		
+		return (gf_rgb(0, 0, 0));
+	p_c = v3_sub(v3_add(o, v3_mult(d, t)), c);
+	normal = v3_norm(p_c);
+	shade = shader(data, d, normal);
+	return (gf_color_mult(gf_rgb(255, 200, 200), shade));
 }
 
 void	render(t_data *data)
