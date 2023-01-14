@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:38:30 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/14 20:00:14 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/14 20:09:30 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ int	main(void)
 
 	mlx_loop(data.mlx);
 	mlx_delete_image(data.mlx, data.canvas);
-	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
 	return (0);
 }
