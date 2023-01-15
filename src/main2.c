@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:38:30 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/15 21:45:34 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/15 20:57:30 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ int	minirt(char *filename)
 	data.canvas = mlx_new_image(data.mlx, data.mlx->width, data.mlx->height);
 	mlx_image_to_window(data.mlx, data.canvas, 0, 0);
 
-	data.cam = gf_camera_new(2., v3(-3., -3., -3.), v3(1., 1., 1.));
+	data.cam = gf_camera_new(1.2, v3(-4., -4., -4.), v3(1., 1., 1.));
 	gf_camera_set_res(&data.cam, data.canvas->width, data.canvas->height);
 	render(&data);
 
@@ -164,7 +164,7 @@ int	main(int argc, char **argv)
 {
 	if (argc != 2)
 	{
-		printf("Usage : ./miniRT *.rt");
+		printf("Usage : ./miniRT *.rt\n");
 		return (1);
 	}
 	minirt(argv[1]);

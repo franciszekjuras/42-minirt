@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 21:17:37 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/15 16:06:08 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/15 20:54:32 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,18 @@ typedef struct s_data
 	t_gf_camera	cam;
 	t_scene		*scene;
 }	t_data;
+
+/**
+ * t - distance from viewr
+ * n - normal vector
+ * v - vector _towards_ viewer
+ * 
+ */
+typedef struct s_cast
+{
+	double	t;
+	t_v3	n;
+	t_v3	v;
+}	t_cast;
 
 #endif

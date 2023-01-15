@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 01:24:36 by W2Wizard          #+#    #+#             */
-/*   Updated: 2023/01/14 20:37:31 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/14 23:26:56 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,9 @@ void mlx_loop(mlx_t* mlx)
 
 		glfwSwapBuffers(mlx->window);
 		const mlx_ctx_t* mlxctx = mlx->context;
-		if (mlxctx->hooks == NULL)
+		if (mlxctx->hooks != NULL)
+			glfwPollEvents();
+		else
 			glfwWaitEvents();
 	}
 }
