@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:38:30 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/14 20:09:30 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/15 21:45:34 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <libgf/gf.h>
 #include "minirt.h"
 #include "input.h"
+#include "parser.h"
 
 // static void	dbg_vec3(const char *prefix, t_v3 v, const char *postfix)
 // {
@@ -54,35 +55,63 @@ double	shader(t_data *data, t_v3 d, t_v3 n)
 	return (0.2 - v3_dot(d, n));
 }
 
-t_gf_color	cast_ray(t_data *data, t_v3 o, t_v3 d)
+double	sphere_intersection(t_v3 o, t_v3 d, t_sphere sphere)
 {
-	t_sphere	sphere;
 	t_v3		c;
 	t_v3		x;
-	t_v3		p_c;
-	t_v3		normal;
 	double		r;
 	double		delta;
 	double		t;
 	double		b2;
-	double		shade;
 
-	sphere.origin = v3(0., 0., 0.);
-	sphere.radius = 2.;
 	c = sphere.origin;
 	r = sphere.radius;
 	x = v3_sub(o, c);
 	b2 = v3_dot(d, x);
 	delta = 4. * (gf_sq(b2) - (v3_dot(x, x) - gf_sq(r)));
 	if (delta <= 0.)
-		return (gf_rgb(0, 0, 0));
+		return (-1);
 	t = quad_smaller_pos_sol(-b2, sqrt(delta) / 2.);
 	if (t <= 0.)		
+		return (-1);
+	return (t);
+}
+
+t_gf_color	intersection(t_data *data, t_v3 o, t_v3 d)
+{
+	t_list		*objects;
+	t_object	*closest;
+	t_object	*object;
+	double		t_min;
+	double		t;
+
+	t_v3		p_c;
+	t_v3		normal;
+	double		shade;
+
+	t_min = INFINITY;
+	closest = NULL;
+	objects = data->scene->objects;
+	t = -1;
+	while (objects != NULL)
+	{
+		object = objects->content;
+		if (object->type == SPHERE)
+			t = sphere_intersection(o, d, *(t_sphere *)object->content);
+		if (t > 0 && t < t_min)
+		{
+			closest = object;
+			t_min = t;
+		}
+		objects = objects->next;
+	}
+	if (closest == NULL)
 		return (gf_rgb(0, 0, 0));
-	p_c = v3_sub(v3_add(o, v3_mult(d, t)), c);
+	t_sphere sphere = *(t_sphere *)closest->content;
+	p_c = v3_sub(v3_add(o, v3_mult(d, t_min)), sphere.origin);
 	normal = v3_norm(p_c);
 	shade = shader(data, d, normal);
-	return (gf_color_mult(gf_rgb(255, 200, 200), shade));
+	return (gf_color_mult(gf_rgb(closest->color.x, closest->color.y, closest->color.z), shade));
 }
 
 void	render(t_data *data)
@@ -99,7 +128,7 @@ void	render(t_data *data)
 		while (x < data->canvas->width)
 		{
 			ray = gf_camera_ray(&data->cam, x, y);
-			color = cast_ray(data, data->cam.pos, ray);
+			color = intersection(data, data->cam.pos, ray);
 			mlx_put_pixel(data->canvas, x, y, gf_ctoi(color));
 			++x;
 		}
@@ -107,10 +136,13 @@ void	render(t_data *data)
 	}
 }
 
-int	main(void)
+int	minirt(char *filename)
 {
 	t_data		data;
 
+	data.scene = parser(filename);
+	if (!data.scene)
+		return (1);
 	data.mlx = mlx_init(800, 600, "MLX42", false);
 	if (!data.mlx)
 		return (1);
@@ -124,5 +156,17 @@ int	main(void)
 	mlx_loop(data.mlx);
 	mlx_delete_image(data.mlx, data.canvas);
 	mlx_terminate(data.mlx);
+	free_scene(data.scene);
+	return (0);
+}
+
+int	main(int argc, char **argv)
+{
+	if (argc != 2)
+	{
+		printf("Usage : ./miniRT *.rt");
+		return (1);
+	}
+	minirt(argv[1]);
 	return (0);
 }
