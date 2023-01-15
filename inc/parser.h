@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:32:40 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/14 17:48:41 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/15 22:34:43 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		parse_ambient_lighting(t_scene *scene, char **line);
 // parse_parameters.c
 int		parse_coordinates(t_v3 *point, char *line);
 int		parse_orientation(t_v3 *point, char *line);
-int		parse_color(t_v3 *color, char *line);
+int		parse_color(t_gf_color *color, char *line);
 
 // free_scene.c
 void	free_scene(t_scene *scene);

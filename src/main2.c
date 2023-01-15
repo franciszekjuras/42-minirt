@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:38:30 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/15 20:57:30 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/15 23:17:06 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,94 +24,108 @@
 // 	fprintf(stderr, "%s(%lf, %lf, %lf)%s", prefix, v.x, v.y, v.z, postfix);
 // }
 
-double	quad_smaller_pos_sol(double const_term, double sign_term)
+double	shader(t_v3 d, t_v3 n)
 {
-	double	sol1;
-	double	sol2;
+	return (0.2 + v3_dot(d, n));
+}
 
-	sol1 = const_term - sign_term;
-	sol2 = const_term + sign_term;
-	if (sol1 < sol2)
+t_quad_sol	quad_solver(double a, double b_half, double c)
+{
+	t_quad_sol	sol;
+	double		delta;
+	double		delta_sqrt;
+
+	sol.num = 0;
+	if (a == 0.)
+		return (sol);
+	delta = gf_sq(b_half) - (a * c);
+	if (delta <= 0.)
+		return (sol);
+	sol.num = 2;
+	delta_sqrt = sqrt(delta);
+	if (a > 0)
 	{
-		if (sol1 > 0)
-			return (sol1);
-		else
-			return (sol2);
+		sol.s1 = (-b_half - delta_sqrt) / a;
+		sol.s2 = (-b_half + delta_sqrt) / a;
 	}
 	else
 	{
-		if (sol2 > 0)
-			return (sol2);
-		else
-			return (sol1);
+		sol.s1 = (-b_half + delta_sqrt) / a;
+		sol.s2 = (-b_half - delta_sqrt) / a;
 	}
+	return (sol);
 }
 
-double	shader(t_data *data, t_v3 d, t_v3 n)
+t_quad_sol	quad_solver_a1(double b_half, double c)
 {
-	(void)data;
-	(void)d;
-	(void)n;
-	return (0.2 - v3_dot(d, n));
-}
-
-double	sphere_intersection(t_v3 o, t_v3 d, t_sphere sphere)
-{
-	t_v3		c;
-	t_v3		x;
-	double		r;
+	t_quad_sol	sol;
 	double		delta;
-	double		t;
-	double		b2;
+	double		delta_sqrt;
 
-	c = sphere.origin;
-	r = sphere.radius;
-	x = v3_sub(o, c);
-	b2 = v3_dot(d, x);
-	delta = 4. * (gf_sq(b2) - (v3_dot(x, x) - gf_sq(r)));
+	sol.num = 0;
+	delta = gf_sq(b_half) - c;
 	if (delta <= 0.)
-		return (-1);
-	t = quad_smaller_pos_sol(-b2, sqrt(delta) / 2.);
-	if (t <= 0.)		
-		return (-1);
-	return (t);
+		return (sol);
+	sol.num = 2;
+	delta_sqrt = sqrt(delta);
+	sol.s1 = (-b_half - delta_sqrt);
+	sol.s2 = (-b_half + delta_sqrt);
+	return (sol);
 }
 
-t_gf_color	intersection(t_data *data, t_v3 o, t_v3 d)
+
+t_cast	sphere_intersection(t_object *obj, t_sphere *sph, t_v3 o, t_v3 d)
 {
-	t_list		*objects;
-	t_object	*closest;
-	t_object	*object;
-	double		t_min;
-	double		t;
-
+	t_cast		cast;
+	t_quad_sol	sol;
+	t_v3		x;
 	t_v3		p_c;
-	t_v3		normal;
-	double		shade;
 
-	t_min = INFINITY;
-	closest = NULL;
-	objects = data->scene->objects;
-	t = -1;
-	while (objects != NULL)
+	cast.obj = NULL;
+	x = v3_sub(o, sph->origin);
+	sol = quad_solver_a1(v3_dot(d, x), (v3_dot(x, x) - gf_sq(sph->radius)));
+	if (sol.num == 0 || sol.s1 <= 0.)
+		return (cast);
+	cast.obj = obj;
+	cast.t = sol.s1;
+	p_c = v3_sub(v3_add(o, v3_mult(d, cast.t)), sph->origin);
+	cast.n = v3_mult(p_c, 1. / sph->radius);
+	return (cast);
+}
+
+t_cast	obj_intersection(t_object *obj, t_v3 o, t_v3 d)
+{
+	t_cast	cast;
+
+	cast.obj = NULL;
+	if (obj->type == SPHERE)
+		return (sphere_intersection(obj, obj->content, o, d));
+	return (cast);
+}
+
+t_cast	closer_cast(t_cast c1, t_cast c2)
+{
+	if (c2.obj == NULL)
+		return (c1);
+	else if (c1.obj == NULL)
+		return (c2);
+	else if (c1.t < c2.t)
+		return (c1);
+	else
+		return (c2);
+}
+
+t_cast	intersection(t_list *objs, t_v3 o, t_v3 d)
+{
+	t_cast		closest;
+
+	closest.obj = NULL;
+	while (objs != NULL)
 	{
-		object = objects->content;
-		if (object->type == SPHERE)
-			t = sphere_intersection(o, d, *(t_sphere *)object->content);
-		if (t > 0 && t < t_min)
-		{
-			closest = object;
-			t_min = t;
-		}
-		objects = objects->next;
+		closest = closer_cast(obj_intersection(objs->content, o, d), closest);
+		objs = objs->next;
 	}
-	if (closest == NULL)
-		return (gf_rgb(0, 0, 0));
-	t_sphere sphere = *(t_sphere *)closest->content;
-	p_c = v3_sub(v3_add(o, v3_mult(d, t_min)), sphere.origin);
-	normal = v3_norm(p_c);
-	shade = shader(data, d, normal);
-	return (gf_color_mult(gf_rgb(closest->color.x, closest->color.y, closest->color.z), shade));
+	return (closest);
 }
 
 void	render(t_data *data)
@@ -119,6 +133,8 @@ void	render(t_data *data)
 	unsigned int	x;
 	unsigned int	y;
 	t_v3			ray;
+	t_cast			cast;
+	double			shade;
 	t_gf_color		color;
 
 	y = 0;
@@ -128,7 +144,14 @@ void	render(t_data *data)
 		while (x < data->canvas->width)
 		{
 			ray = gf_camera_ray(&data->cam, x, y);
-			color = intersection(data, data->cam.pos, ray);
+			cast = intersection(data->scene->objects, data->cam.pos, ray);
+			if (cast.obj != NULL)
+			{
+				shade = shader(v3_neg(ray), cast.n);
+				color = gf_color_mult(cast.obj->color, shade);
+			}
+			else
+				color = gf_rgb(0, 0, 0);
 			mlx_put_pixel(data->canvas, x, y, gf_ctoi(color));
 			++x;
 		}

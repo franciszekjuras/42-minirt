@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:55:15 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/14 18:51:21 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/15 23:05:34 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ typedef struct s_light
 
 typedef struct s_ambient
 {
-	t_v3	color;
-	double	brightness;
+	t_gf_color	color;
+	double		brightness;
 }	t_ambient;
 
 // Objects -----------------------------------
@@ -72,9 +72,9 @@ typedef enum e_type
 
 typedef struct s_object
 {
-	void	*content;
-	t_v3	color;
-	t_type	type;
+	void		*content;
+	t_gf_color	color;
+	t_type		type;
 }	t_object;
 
 // Scene -------------------------------------

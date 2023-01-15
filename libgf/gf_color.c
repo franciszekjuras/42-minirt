@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:39:22 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/14 19:51:33 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/15 22:27:21 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,13 @@ int	gf_ctoi(t_gf_color color)
 	return (cap_to_byte(color.r) << 24
 		| cap_to_byte(color.g) << 16
 		| cap_to_byte(color.b) << 8
-		| cap_to_byte(color.a * 255.));
+		| 255);
 }
 
 t_gf_color	gf_rgb(double r, double g, double b)
 {
 	t_gf_color	color;
 
-	color.a = 1.;
 	color.r = r;
 	color.g = g;
 	color.b = b;

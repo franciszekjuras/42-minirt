@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:06:11 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/14 17:45:41 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/15 22:34:24 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	parse_orientation(t_v3 *point, char *line)
 	return (0);
 }
 
-int	parse_color(t_v3 *color, char *line)
+int	parse_color(t_gf_color *color, char *line)
 {
 	char	**split;
 
@@ -63,12 +63,12 @@ int	parse_color(t_v3 *color, char *line)
 		printf("Colot usage [R,G,B]\n");
 		return (1);
 	}
-	color->x = ft_atof(split[0]);
-	color->y = ft_atof(split[1]);
-	color->z = ft_atof(split[2]);
-	if (color->x < 0 || color->x > 255
-		|| color->y < 0 || color->y > 255
-		|| color->z < 0 || color->z > 255)
+	color->r = ft_atof(split[0]);
+	color->g = ft_atof(split[1]);
+	color->b = ft_atof(split[2]);
+	if (color->r < 0 || color->r > 255
+		|| color->g < 0 || color->g > 255
+		|| color->b < 0 || color->b > 255)
 	{
 		printf("RGB components have to be in range [0,255]\n");
 		return (1);

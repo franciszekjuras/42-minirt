@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:41:47 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/14 19:52:52 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/15 22:27:39 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ typedef struct s_gf_color
 	double	r;
 	double	g;
 	double	b;
-	double	a;
 }	t_gf_color;
 
 typedef struct s_gf_grad

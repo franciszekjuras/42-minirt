@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 21:17:37 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/15 20:54:32 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/15 21:41:28 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,21 @@ typedef struct s_data
 
 /**
  * t - distance from viewr
- * n - normal vector
- * v - vector _towards_ viewer
- * 
+ * n - normal vector 
+ * obj - object pointer
  */
 typedef struct s_cast
 {
-	double	t;
-	t_v3	n;
-	t_v3	v;
+	double		t;
+	t_v3		n;
+	t_object	*obj;
 }	t_cast;
+
+typedef struct s_quad_sol
+{
+	int		num;
+	double	s1;
+	double	s2;
+}	t_quad_sol;
 
 #endif
