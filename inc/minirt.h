@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 21:17:37 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/16 13:54:04 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/16 18:49:42 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ typedef struct s_quad_sol
 /*sphere*/
 t_cast		sphere_intersection(t_object *obj,
 				t_sphere *sph, t_v3 o, t_v3 d);
+
+/*plane*/
+t_cast	plane_intersection(t_object *obj,
+				t_plane *pln, t_v3 o, t_v3 d);
 
 /*intersection.c*/
 t_cast		obj_intersection(t_object *obj, t_v3 o, t_v3 d);

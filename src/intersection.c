@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 23:21:54 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/16 14:01:23 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/16 18:50:10 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ t_cast	obj_intersection(t_object *obj, t_v3 o, t_v3 d)
 	cast.obj = NULL;
 	if (obj->type == SPHERE)
 		return (sphere_intersection(obj, obj->content, o, d));
+	else if (obj->type == PLANE)
+		return (plane_intersection(obj, obj->content, o, d));
 	return (cast);
 }
 
