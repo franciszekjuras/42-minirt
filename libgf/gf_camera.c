@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:39:18 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/14 18:39:00 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/16 12:33:15 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ static t_v3	get_perpend_vec_in_xy_plane(t_v3 v)
 	return (v3(v.y, -v.x, 0));
 }
 
-t_gf_camera	gf_camera_new(double fov, t_v3 pos, t_v3 dir)
+t_gf_camera	gf_camera_new(int fov_deg, t_v3 pos, t_v3 dir)
 {
 	t_gf_camera	cam;
 
 	cam.fov_scale_px = 0;
 	cam.mid_height_px = 0;
 	cam.mid_width_px = 0;
-	cam.fov = fov;
+	cam.fov = ((double)fov_deg) * GF_DEG ;
 	cam.pos = pos;
 	cam.z = v3_norm(dir);
 	cam.x = get_perpend_vec_in_xy_plane(cam.z);

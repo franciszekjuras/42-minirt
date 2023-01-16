@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:41:47 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/15 22:27:39 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/16 12:36:45 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,6 @@ t_gf_color	gf_rgb(double r, double g, double b);
 t_gf_color	gf_color_mult(t_gf_color color, double mult);
 /*gf_strtodouble.c*/
 double		gf_strtodouble(char **npp);
-/*gf_grad.c*/
-t_gf_grad	gf_grad(t_gf_color beg, t_gf_color end, double ibeg, double iend);
-t_gf_color	gf_color_grad(double i, t_gf_grad *grad);
 /*gf_vector.c*/
 t_v3		v3(double x, double y, double z);
 t_v3		v3_neg(t_v3 v);
@@ -89,7 +86,7 @@ void		v3_isub(t_v3 *v1, t_v3 v2);
 void		v3_iadd(t_v3 *v1, t_v3 v2);
 void		v3_imult(t_v3 *v, double m);
 /*gf_camera.c*/
-t_gf_camera	gf_camera_new(double fov, t_v3 pos, t_v3 dir);
+t_gf_camera	gf_camera_new(int fov_deg, t_v3 pos, t_v3 dir);
 void		gf_camera_set_res(t_gf_camera *cam, int width_px, int height_px);
 t_v3		gf_camera_ray(t_gf_camera *cam, int x_px, int y_px);
 /*gf_utils.c*/
