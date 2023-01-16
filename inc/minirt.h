@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 21:17:37 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/15 23:31:07 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/16 12:55:46 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_cast
 {
 	double		t;
 	t_v3		n;
+	t_v3		p;
 	t_object	*obj;
 }	t_cast;
 
@@ -58,6 +59,6 @@ t_quad_sol	quad_solver_a1(double b_half, double c);
 /*render.c*/
 void		render(t_data *data);
 /*shader.c*/
-double		shader(t_v3 d, t_v3 n);
+double		shader(t_data *data, t_v3 p, t_v3 n);
 
 #endif
