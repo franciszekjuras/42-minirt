@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 23:18:32 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/16 12:59:41 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/16 13:47:50 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	render_pixel(t_data *data, unsigned int x, unsigned int y)
 	cast = intersection(data->scene->objects, data->cam.pos, ray);
 	if (cast.obj != NULL)
 	{
-		shade = shader(data, cast.p, cast.n);
+		shade = shader(data, cast);
 		color = gf_color_mult(cast.obj->color, shade);
 	}
 	else

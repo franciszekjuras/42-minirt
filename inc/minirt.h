@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 21:17:37 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/16 12:55:46 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/16 13:54:04 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,13 @@ t_cast		sphere_intersection(t_object *obj,
 t_cast		obj_intersection(t_object *obj, t_v3 o, t_v3 d);
 t_cast		closer_cast(t_cast c1, t_cast c2);
 t_cast		intersection(t_list *objs, t_v3 o, t_v3 d);
+t_cast		intersection_except(t_list *objs, t_object *obj, t_v3 o, t_v3 d);
 /*quad_solver.c*/
 t_quad_sol	quad_solver(double a, double b_half, double c);
 t_quad_sol	quad_solver_a1(double b_half, double c);
 /*render.c*/
 void		render(t_data *data);
 /*shader.c*/
-double		shader(t_data *data, t_v3 p, t_v3 n);
+double		shader(t_data *data, t_cast cast);
 
 #endif

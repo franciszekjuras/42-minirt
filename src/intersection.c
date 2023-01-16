@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 23:21:54 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/15 23:26:50 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/16 14:01:23 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,21 @@ t_cast	intersection(t_list *objs, t_v3 o, t_v3 d)
 	while (objs != NULL)
 	{
 		closest = closer_cast(obj_intersection(objs->content, o, d), closest);
+		objs = objs->next;
+	}
+	return (closest);
+}
+
+t_cast	intersection_except(t_list *objs, t_object *obj, t_v3 o, t_v3 d)
+{
+	t_cast		closest;
+
+	closest.obj = NULL;
+	while (objs != NULL)
+	{
+		if (objs->content != obj)
+			closest = closer_cast(obj_intersection(objs->content, o, d),
+				closest);
 		objs = objs->next;
 	}
 	return (closest);
