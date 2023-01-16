@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:02:58 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/12 15:18:51 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/16 22:50:20 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,7 @@ int	parse_cylinder(t_scene *scene, char **line)
 
 	error = 0;
 	if (splitsize(line) != 6)
-	{
-		printf("Wrong cylinder usage\n");
-		return (1);
-	}
+		return (printf("Wrong cylinder usage\n"));
 	cylinder = malloc(sizeof(t_cylinder));
 	object = malloc(sizeof(t_object));
 	error += parse_coordinates(&cylinder->origin, line[1]);
@@ -77,10 +74,7 @@ int	parse_cylinder(t_scene *scene, char **line)
 	cylinder->radius = ft_atof(line[3]) / 2;
 	cylinder->height = ft_atof(line[4]);
 	if (cylinder->height < 0 || cylinder->radius < 0)
-	{
-		printf("Cylinders can not have a diameter or height that is negative\n");
-		return (1);
-	}
+		return (printf("Cylinders cannot have negative diameter or height\n"));
 	error += parse_color(&object->color, line[5]);
 	object->content = cylinder;
 	object->type = CYLINDER;

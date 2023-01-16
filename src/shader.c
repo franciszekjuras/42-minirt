@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 23:29:44 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/16 14:08:00 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/16 22:45:59 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ double	shader(t_data *data, t_cast cast)
 	if (light_dot_normal > 0.)
 	{
 		shadow_cast = intersection_except(data->scene->objects,
-			cast.obj, cast.p, light);
+				cast.obj, cast.p, light);
 		if (shadow_cast.obj == NULL || shadow_cast.t > light_dist)
 			res += ft_fmax(0., light_dot_normal);
 	}

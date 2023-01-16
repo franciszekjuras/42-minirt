@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 21:17:37 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/16 18:49:42 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/16 22:52:38 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,23 @@ typedef struct s_quad_sol
 	double	s2;
 }	t_quad_sol;
 
+typedef struct s_cyl_qtx
+{
+	t_quad_sol	sol;
+	t_v3		x;
+	t_v3		v;
+	t_v3		p_c1;
+	t_v3		p_c2;
+	double		m1;
+	double		m2;
+	double		m_max;
+}	t_cyl_qtx;
+
 /*sphere*/
 t_cast		sphere_intersection(t_object *obj,
 				t_sphere *sph, t_v3 o, t_v3 d);
+t_cast		cylinder_intersection(t_object *obj,
+				t_cylinder *cyl, t_v3 o, t_v3 d);
 
 /*plane*/
 t_cast	plane_intersection(t_object *obj,

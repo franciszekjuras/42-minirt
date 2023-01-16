@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:06:11 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/15 22:34:24 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/16 17:38:01 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	parse_orientation(t_v3 *point, char *line)
 		printf("Orientation vector values have to be in range [-1,1]\n");
 		return (1);
 	}
+	*point = v3_norm(*point);
 	free_split(split);
 	return (0);
 }

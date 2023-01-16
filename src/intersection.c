@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 23:21:54 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/16 18:50:10 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/16 22:52:15 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_cast	obj_intersection(t_object *obj, t_v3 o, t_v3 d)
 		return (sphere_intersection(obj, obj->content, o, d));
 	else if (obj->type == PLANE)
 		return (plane_intersection(obj, obj->content, o, d));
+	else if (obj->type == CYLINDER)
+		return (cylinder_intersection(obj, obj->content, o, d));
 	return (cast);
 }
 
@@ -58,7 +60,7 @@ t_cast	intersection_except(t_list *objs, t_object *obj, t_v3 o, t_v3 d)
 	{
 		if (objs->content != obj)
 			closest = closer_cast(obj_intersection(objs->content, o, d),
-				closest);
+					closest);
 		objs = objs->next;
 	}
 	return (closest);

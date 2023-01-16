@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:38:30 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/16 18:43:47 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/16 22:51:55 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	minirt(char *filename)
 	mlx_image_to_window(data.mlx, data.canvas, 0, 0);
 
 	data.cam = gf_camera_new(data.scene->camera->fov,
-		data.scene->camera->origin, data.scene->camera->orientation);
+			data.scene->camera->origin, data.scene->camera->orientation);
 	gf_camera_set_res(&data.cam, data.canvas->width, data.canvas->height);
 
 	mlx_loop_hook(data.mlx, hook, &data);

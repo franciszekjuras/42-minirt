@@ -7,7 +7,7 @@ FILES = \
 	$(MAIN) \
 	free_scene parser parser_utils parse_lighting parse_objects \
 	parse_parameters get_next_line get_next_line_utils quad_solver\
-	render shader intersection sphere plane
+	render shader intersection sphere plane cylinder
 
 HEADERS= \
 	minirt input parser get_next_line
