@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gf_grad.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:40:32 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/13 13:15:19 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/16 10:50:59 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_gf_grad	gf_grad(t_gf_color beg, t_gf_color end, double ibeg, double iend)
 		g.iend = ibeg;
 	}
 	idif = g.iend - g.ibeg;
-	g.va = (g.end.a - g.beg.a) / idif;
+	// g.va = (g.end.a - g.beg.a) / idif;
 	g.vr = (g.end.r - g.beg.r) / idif;
 	g.vg = (g.end.g - g.beg.g) / idif;
 	g.vb = (g.end.b - g.beg.b) / idif;
@@ -50,7 +50,7 @@ t_gf_color	gf_color_grad(double i, t_gf_grad *grad)
 		return (grad->end);
 	di = (i - grad->ibeg);
 	c = grad->beg;
-	c.a += (int)(di * grad->va);
+	// c.a += (int)(di * grad->va);
 	c.r += (int)(di * grad->vr);
 	c.g += (int)(di * grad->vg);
 	c.b += (int)(di * grad->vb);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:38:30 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/15 23:41:15 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/16 11:21:46 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,25 @@
 #include "minirt.h"
 #include "parser.h"
 
+void	hook(void *param)
+{
+	static int	height = 0;
+	static int	width = 0;
+	t_data		*data;
+
+	data = param;
+	// if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
+	// 	mlx_close_window(data->mlx);
+	if (data->mlx->height != height || data->mlx->width != width)
+	{
+		height = data->mlx->height;
+		width = data->mlx->width;
+		mlx_resize_image(data->canvas, data->mlx->width, data->mlx->height);
+		gf_camera_set_res(&data->cam, data->mlx->width, data->mlx->height);
+		render(data);
+	}
+}
+
 int	minirt(char *filename)
 {
 	t_data		data;
@@ -25,7 +44,7 @@ int	minirt(char *filename)
 	data.scene = parser(filename);
 	if (!data.scene)
 		return (1);
-	data.mlx = mlx_init(800, 600, "MLX42", false);
+	data.mlx = mlx_init(800, 600, "MLX42", true);
 	if (!data.mlx)
 		return (1);
 	data.canvas = mlx_new_image(data.mlx, data.mlx->width, data.mlx->height);
@@ -33,8 +52,8 @@ int	minirt(char *filename)
 
 	data.cam = gf_camera_new(1.2, v3(-4., -4., -4.), v3(1., 1., 1.));
 	gf_camera_set_res(&data.cam, data.canvas->width, data.canvas->height);
-	render(&data);
 
+	mlx_loop_hook(data.mlx, hook, &data);
 	mlx_loop(data.mlx);
 	mlx_delete_image(data.mlx, data.canvas);
 	mlx_terminate(data.mlx);
