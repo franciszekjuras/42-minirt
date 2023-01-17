@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 21:17:37 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/17 22:48:17 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/17 23:28:15 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ t_quad_sol	quad_solver_a1(double b_half, double c);
 /*render.c*/
 void		render(t_data *data);
 /*shader.c*/
-double		shader(t_data *data, t_cast cast);
+double		shader(t_data *data, t_cast cast, t_v3 viewer);
 
 #endif
