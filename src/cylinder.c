@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 23:26:18 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/16 22:45:48 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/17 22:33:11 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static t_cyl_qtx	calc_cyl_ctx(t_cylinder *cyl, t_v3 o, t_v3 d)
 {
 	t_cyl_qtx	q;
 
+	q.c = cyl->origin;
 	q.v = cyl->orientation;
 	q.m_max = cyl->height;
 	q.x = v3_sub(o, cyl->origin);
@@ -33,14 +34,19 @@ static t_cyl_qtx	calc_cyl_ctx(t_cylinder *cyl, t_v3 o, t_v3 d)
 
 static t_cast	cyl_cap(t_object *obj, const t_cyl_qtx *q, t_v3 o, t_v3 d)
 {
-	t_cast	cast;
+	t_plane	cap;
 
-	(void) obj;
-	(void) q;
-	(void) o;
-	(void) d;
-	cast.obj = NULL;
-	return (cast);
+	if (q->m1 >= q->m_max)
+	{
+		cap.orientation = q->v;
+		cap.origin = v3_add(q->c, v3_mult(q->v, q->m_max));
+	}
+	else
+	{
+		cap.orientation = v3_neg(q->v);
+		cap.origin = q->c;
+	}
+	return (plane_intersection(obj, &cap, o, d));
 }
 
 static t_cast	cyl_side(t_object *obj, t_cylinder *cyl, const t_cyl_qtx *q)
