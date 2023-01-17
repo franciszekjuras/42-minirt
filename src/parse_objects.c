@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:02:58 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/16 22:50:20 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/18 00:38:27 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,31 @@ int	parse_cylinder(t_scene *scene, char **line)
 	error += parse_color(&object->color, line[5]);
 	object->content = cylinder;
 	object->type = CYLINDER;
+	ft_lstadd_back(&scene->objects, ft_lstnew(object));
+	return (error);
+}
+
+int	parse_parabol(t_scene *scene, char **line)
+{
+	t_parabol	*prb;
+	t_object	*object;
+	int			error;
+
+	error = 0;
+	if (splitsize(line) != 7)
+		return (printf("Wrong paraboloid usage\n"));
+	prb = malloc(sizeof(t_parabol));
+	object = malloc(sizeof(t_object));
+	error += parse_coordinates(&prb->origin, line[1]);
+	error += parse_orientation(&prb->orientation, line[2]);
+	prb->focus = ft_atof(line[3]);
+	prb->bottom = ft_atof(line[4]);
+	prb->top = ft_atof(line[5]);
+	if (prb->focus <= 0. || prb->bottom < 0. || prb->top <= prb->bottom)
+		return (printf("Invalid paraboloid specification\n"));
+	error += parse_color(&object->color, line[6]);
+	object->content = prb;
+	object->type = PARABOL;
 	ft_lstadd_back(&scene->objects, ft_lstnew(object));
 	return (error);
 }

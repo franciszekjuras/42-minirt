@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 21:17:37 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/17 23:28:15 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/18 00:46:07 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,25 @@ typedef struct s_cyl_qtx
 	double		m_max;
 }	t_cyl_qtx;
 
-/*sphere*/
-t_cast		sphere_cast(t_object *obj,
-				t_sphere *sph, t_v3 o, t_v3 d);
-t_cast		cylinder_cast(t_object *obj,
-				t_cylinder *cyl, t_v3 o, t_v3 d);
+typedef struct s_par_qtx
+{
+	t_quad_sol	sol;
+	t_v3		x;
+	t_v3		c;
+	t_v3		v;
+	t_v3		p_c1;
+	t_v3		p_c2;
+	double		m1;
+	double		m2;
+	double		m_max;
+	double		m_min;
+}	t_par_qtx;
 
-/*plane*/
-t_cast		plane_cast(t_object *obj,
-				t_plane *pln, t_v3 o, t_v3 d);
+/*specific object casts*/
+t_cast		sphere_cast(t_object *obj, t_sphere *sph, t_v3 o, t_v3 d);
+t_cast		plane_cast(t_object *obj, t_plane *pln, t_v3 o, t_v3 d);
+t_cast		cylinder_cast(t_object *obj, t_cylinder *cyl, t_v3 o, t_v3 d);
+t_cast		parabol_cast(t_object *obj, t_parabol *cyl, t_v3 o, t_v3 d);
 
 /*cast.c*/
 t_cast		obj_cast(t_object *obj, t_v3 o, t_v3 d);

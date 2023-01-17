@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:32:40 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/15 22:34:43 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/18 00:21:43 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ double	ft_atof(const char *nptr);
 int		parse_sphere(t_scene *scene, char **line);
 int		parse_plane(t_scene *scene, char **line);
 int		parse_cylinder(t_scene *scene, char **line);
+int		parse_parabol(t_scene *scene, char **line);
 
 // parse_lighting.c
 int		parse_camera(t_scene *scene, char **line);

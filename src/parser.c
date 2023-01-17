@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:55:10 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/12 15:19:15 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/18 00:36:56 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	parse_line(t_scene *scene, char **line)
 		return (parse_plane(scene, line));
 	else if (ft_strncmp(line[0], "cy", 2) == 0)
 		return (parse_cylinder(scene, line));
+	else if (ft_strncmp(line[0], "pa", 2) == 0)
+		return (parse_parabol(scene, line));
 	else
 	{
 		printf("Error : input has an unknown element\n");

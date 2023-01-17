@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:55:15 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/15 23:05:34 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/18 00:21:22 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,21 @@ typedef struct s_cylinder
 	double	height;
 }	t_cylinder;
 
+typedef struct s_parabol
+{
+	t_v3	origin;
+	t_v3	orientation;
+	double	focus;
+	double	top;
+	double	bottom;
+}	t_parabol;
+
 typedef enum e_type
 {
 	PLANE,
 	SPHERE,
-	CYLINDER
+	CYLINDER,
+	PARABOL
 }	t_type;
 
 typedef struct s_object

@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 23:21:54 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/17 22:47:47 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/18 00:39:21 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ t_cast	obj_cast(t_object *obj, t_v3 o, t_v3 d)
 		return (plane_cast(obj, obj->content, o, d));
 	else if (obj->type == CYLINDER)
 		return (cylinder_cast(obj, obj->content, o, d));
-	return (cast);
+	else if (obj->type == CYLINDER)
+		return (parabol_cast(obj, obj->content, o, d));
+	else
+		return (cast);
 }
 
 t_cast	closer_cast(t_cast c1, t_cast c2)
