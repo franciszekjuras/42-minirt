@@ -6,13 +6,13 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 23:26:18 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/16 12:57:06 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/17 22:44:58 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_cast	sphere_intersection(t_object *obj, t_sphere *sph, t_v3 o, t_v3 d)
+t_cast	sphere_cast(t_object *obj, t_sphere *sph, t_v3 o, t_v3 d)
 {
 	t_cast		cast;
 	t_quad_sol	sol;

@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 23:26:18 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/17 22:33:11 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/17 22:45:47 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static t_cast	cyl_cap(t_object *obj, const t_cyl_qtx *q, t_v3 o, t_v3 d)
 		cap.orientation = v3_neg(q->v);
 		cap.origin = q->c;
 	}
-	return (plane_intersection(obj, &cap, o, d));
+	return (plane_cast(obj, &cap, o, d));
 }
 
 static t_cast	cyl_side(t_object *obj, t_cylinder *cyl, const t_cyl_qtx *q)
@@ -65,7 +65,7 @@ static t_cast	cyl_side(t_object *obj, t_cylinder *cyl, const t_cyl_qtx *q)
 	return (cast);
 }
 
-t_cast	cylinder_intersection(t_object *obj, t_cylinder *cyl, t_v3 o, t_v3 d)
+t_cast	cylinder_cast(t_object *obj, t_cylinder *cyl, t_v3 o, t_v3 d)
 {
 	t_cast		cast;
 	t_cyl_qtx	q;

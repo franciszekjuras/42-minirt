@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 21:17:37 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/17 22:27:18 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/17 22:48:17 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,20 +59,20 @@ typedef struct s_cyl_qtx
 }	t_cyl_qtx;
 
 /*sphere*/
-t_cast		sphere_intersection(t_object *obj,
+t_cast		sphere_cast(t_object *obj,
 				t_sphere *sph, t_v3 o, t_v3 d);
-t_cast		cylinder_intersection(t_object *obj,
+t_cast		cylinder_cast(t_object *obj,
 				t_cylinder *cyl, t_v3 o, t_v3 d);
 
 /*plane*/
-t_cast	plane_intersection(t_object *obj,
+t_cast		plane_cast(t_object *obj,
 				t_plane *pln, t_v3 o, t_v3 d);
 
-/*intersection.c*/
-t_cast		obj_intersection(t_object *obj, t_v3 o, t_v3 d);
+/*cast.c*/
+t_cast		obj_cast(t_object *obj, t_v3 o, t_v3 d);
 t_cast		closer_cast(t_cast c1, t_cast c2);
-t_cast		intersection(t_list *objs, t_v3 o, t_v3 d);
-t_cast		intersection_except(t_list *objs, t_object *obj, t_v3 o, t_v3 d);
+t_cast		scene_cast(t_list *objs, t_v3 o, t_v3 d);
+t_cast		scene_cast_except(t_list *objs, t_object *obj, t_v3 o, t_v3 d);
 /*quad_solver.c*/
 t_quad_sol	quad_solver(double a, double b_half, double c);
 t_quad_sol	quad_solver_a1(double b_half, double c);

@@ -6,14 +6,14 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 18:47:16 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/17 22:37:21 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/17 22:45:34 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "math.h"
 
-t_cast	plane_intersection(t_object *obj, t_plane *pln, t_v3 o, t_v3 d)
+t_cast	plane_cast(t_object *obj, t_plane *pln, t_v3 o, t_v3 d)
 {
 	t_cast	cast;
 	t_v3	x;
