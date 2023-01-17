@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 21:17:37 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/16 22:52:38 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/17 10:09:14 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_data
 	mlx_image_t	*canvas;
 	t_gf_camera	cam;
 	t_scene		*scene;
+	int			exit;
 }	t_data;
 
 /**

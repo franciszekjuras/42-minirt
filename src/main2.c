@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:38:30 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/16 22:51:55 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/17 10:10:48 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ void	hook(void *param)
 	t_data		*data;
 
 	data = param;
-	// if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
-	// 	mlx_close_window(data->mlx);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
+		data->exit = 1;
+	else if (!mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE) && data->exit)
+		mlx_close_window(data->mlx);
 	if (data->mlx->height != height || data->mlx->width != width)
 	{
 		height = data->mlx->height;
@@ -42,6 +44,7 @@ int	minirt(char *filename)
 	t_data		data;
 
 	data.scene = parser(filename);
+	data.exit = 0;
 	if (!data.scene)
 		return (1);
 	data.mlx = mlx_init(800, 600, "MLX42", true);

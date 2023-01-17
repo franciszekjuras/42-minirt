@@ -6,7 +6,7 @@
 /*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 18:47:16 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/16 19:05:50 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/16 20:04:53 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_cast	plane_intersection(t_object *obj, t_plane *pln, t_v3 o, t_v3 d)
 		cast.obj = obj;
 		cast.p = v3_add(o, v3_mult(d, cast.t));
 		if (denom < 0)
-			cast.n = v3_mult(pln->orientation, 1.0);
+			cast.n = pln->orientation;
 		else
 			cast.n = v3_mult(pln->orientation, -1.0);
 	}
