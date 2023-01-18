@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:55:10 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/18 00:36:56 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/18 14:26:30 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,35 @@ static void	init_scene(t_scene *scene)
 	scene->objects = NULL;
 }
 
+static int	check_file(char *filename)
+{
+	char	*end;
+	int		end_len;
+	int		name_len;
+	int		i;
+
+	end = ".rt";
+	end_len = ft_strlen(end);
+	name_len = ft_strlen(filename);
+	i = 0;
+	while (i < end_len)
+	{
+		if (filename[name_len - i] != end[end_len - i])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 static int	open_file(char *filename)
 {
 	int	fd;
 
+	if (!check_file(filename))
+	{
+		printf("Error : scene file has to end with .rt\n");
+		exit(1);
+	}
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
@@ -35,7 +60,12 @@ static int	open_file(char *filename)
 
 int	parse_line(t_scene *scene, char **line)
 {
-	if (!splitsize(line) || !ft_strncmp(line[0], "\n", 2))
+	if (check_line(line))
+	{
+		printf("Error : input has an unknown character\n");
+		return (1);
+	}
+	else if (!splitsize(line) || !ft_strncmp(line[0], "\n", 2))
 		return (0);
 	else if (ft_strncmp(line[0], "A", 1) == 0)
 		return (parse_ambient_lighting(scene, line));

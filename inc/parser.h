@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:32:40 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/18 00:21:43 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/18 14:25:35 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		splitsize(char **split);
 void	free_split(char **split);
 void	free_lines(char *line, char **split);
 double	ft_atof(const char *nptr);
+int		check_line(char **split);
 
 // parse_objects.c
 int		parse_sphere(t_scene *scene, char **line);
