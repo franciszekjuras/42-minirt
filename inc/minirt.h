@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 21:17:37 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/18 00:46:07 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/18 08:43:07 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct s_par_qtx
 t_cast		sphere_cast(t_object *obj, t_sphere *sph, t_v3 o, t_v3 d);
 t_cast		plane_cast(t_object *obj, t_plane *pln, t_v3 o, t_v3 d);
 t_cast		cylinder_cast(t_object *obj, t_cylinder *cyl, t_v3 o, t_v3 d);
-t_cast		parabol_cast(t_object *obj, t_parabol *cyl, t_v3 o, t_v3 d);
+t_cast		parabol_cast(t_object *obj, t_parabol *par, t_v3 o, t_v3 d);
 
 /*cast.c*/
 t_cast		obj_cast(t_object *obj, t_v3 o, t_v3 d);

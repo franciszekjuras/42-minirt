@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 23:29:44 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/17 23:43:45 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/18 09:32:18 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ double	specular_factor(double l_dot_n, t_v3 light, t_v3 normal, t_v3 viewer)
 	reflection = v3_sub(v3_mult(normal, 2. * l_dot_n), light);
 	r_dot_v = v3_dot(reflection, viewer);
 	if (r_dot_v > 0.)
-		return (pow(r_dot_v, 6.));
+		return (pow(r_dot_v, 8.));
 	else
 		return (0.);
 }

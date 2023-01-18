@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:39:22 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/15 22:27:21 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/18 09:34:30 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,3 +49,10 @@ t_gf_color	gf_color_mult(t_gf_color color, double mult)
 	return (color);
 }
 
+t_gf_color	gf_color_channel_mult(t_gf_color color, t_gf_color ch_mult)
+{
+	color.r *= ch_mult.r;
+	color.g *= ch_mult.g;
+	color.b *= ch_mult.b;
+	return (color);
+}
