@@ -1,42 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gf_color.c                                         :+:      :+:    :+:   */
+/*   gf_color2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:39:22 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/18 12:11:39 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/18 12:23:39 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "gf.h"
 
-static int	cap_to_byte(int v)
+void	gf_color_iadd(t_gf_color *color, t_gf_color add)
 {
-	if (v >= 255.)
-		return (255);
-	else if (v <= 0.)
-		return (0);
-	else
-		return ((int)(v + 0.5));
+	color->r += add.r;
+	color->g += add.g;
+	color->b += add.b;
 }
 
-int	gf_ctoi(t_gf_color color)
+t_gf_color	gf_color_mult(t_gf_color color, double mult)
 {
-	return (cap_to_byte(color.r) << 24
-		| cap_to_byte(color.g) << 16
-		| cap_to_byte(color.b) << 8
-		| 255);
+	color.r *= mult;
+	color.g *= mult;
+	color.b *= mult;
+	return (color);
 }
 
-t_gf_color	gf_rgb(double r, double g, double b)
+t_gf_color	gf_color_ch_mult(t_gf_color color, t_gf_color ch, double mult)
 {
-	t_gf_color	color;
-
-	color.r = r;
-	color.g = g;
-	color.b = b;
+	color.r *= ch.r * mult / 255.;
+	color.g *= ch.g * mult / 255.;
+	color.b *= ch.b * mult / 255.;
 	return (color);
 }

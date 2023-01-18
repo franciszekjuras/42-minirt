@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 21:17:37 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/18 08:43:07 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/18 12:38:26 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,15 @@ typedef struct s_par_qtx
 	double		m_min;
 }	t_par_qtx;
 
+typedef struct s_spot_ctx
+{
+	t_light		*light;
+	t_v3		l;
+	double		l_dist;
+	double		l_dot_n;
+	t_cast		shadow_cast;
+}	t_spot_ctx;
+
 /*specific object casts*/
 t_cast		sphere_cast(t_object *obj, t_sphere *sph, t_v3 o, t_v3 d);
 t_cast		plane_cast(t_object *obj, t_plane *pln, t_v3 o, t_v3 d);
@@ -89,6 +98,6 @@ t_quad_sol	quad_solver_a1(double b_half, double c);
 /*render.c*/
 void		render(t_data *data);
 /*shader.c*/
-double		shader(t_data *data, t_cast cast, t_v3 viewer);
+t_gf_color	shader(t_data *data, t_cast cast, t_v3 viewer);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:41:47 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/18 09:34:40 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/18 12:24:05 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ typedef struct s_gf_grad
 int			gf_ctoi(t_gf_color color);
 t_gf_color	gf_rgb(double r, double g, double b);
 t_gf_color	gf_color_mult(t_gf_color color, double mult);
-t_gf_color	gf_color_channel_mult(t_gf_color color, t_gf_color ch_mult);
+t_gf_color	gf_color_ch_mult(t_gf_color color, t_gf_color ch, double mult);
+void		gf_color_iadd(t_gf_color *color, t_gf_color add);
 /*gf_strtodouble.c*/
 double		gf_strtodouble(char **npp);
 /*gf_vector.c*/
