@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:38:30 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/17 22:39:31 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/18 16:46:22 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,9 @@ int	minirt(char *filename)
 		return (1);
 	data.canvas = mlx_new_image(data.mlx, data.mlx->width, data.mlx->height);
 	mlx_image_to_window(data.mlx, data.canvas, 0, 0);
-
 	data.cam = gf_camera_new(data.scene->camera->fov,
 			data.scene->camera->origin, data.scene->camera->orientation);
 	gf_camera_set_res(&data.cam, data.canvas->width, data.canvas->height);
-
 	mlx_loop_hook(data.mlx, hook, &data);
 	mlx_loop(data.mlx);
 	mlx_delete_image(data.mlx, data.canvas);

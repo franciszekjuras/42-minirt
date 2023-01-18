@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shader.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 23:29:44 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/18 15:29:38 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/18 16:47:31 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,13 @@ static void	add_spot_light(t_gf_color *res,
 {
 	t_gf_color	uniform;
 	t_gf_color	specular;
-	t_gf_color	spot_color;
 	double		specular_factor;
 
-	spot_color = gf_rgb(s.light->color.r, s.light->color.g, s.light->color.b);
-	uniform = gf_color_ch_mult(cast.obj->color, spot_color,
+	uniform = gf_color_ch_mult(cast.obj->color, s.light->color,
 			s.l_dot_n * s.light->brightness);
 	specular_factor = calc_specular_factor(s.l_dot_n, s.l, cast.n, viewer);
-	specular = gf_color_mult(spot_color, specular_factor * s.light->brightness);
+	specular = gf_color_mult(s.light->color,
+			specular_factor * s.light->brightness);
 	gf_color_iadd(res, uniform);
 	gf_color_iadd(res, specular);
 }
@@ -65,9 +64,7 @@ t_gf_color	shader(t_data *data, t_cast cast, t_v3 viewer)
 			s.shadow_cast = scene_cast_except(data->scene->objects,
 					cast.obj, cast.p, s.l);
 			if (s.shadow_cast.obj == NULL || s.shadow_cast.t > s.l_dist)
-			{
 				add_spot_light(&res, cast, s, viewer);
-			}
 		}
 		lights = lights->next;
 	}

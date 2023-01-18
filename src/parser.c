@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:55:10 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/18 15:20:10 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/18 16:49:53 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,7 @@ static int	open_file(char *filename)
 int	parse_line(t_scene *scene, char **line)
 {
 	if (check_line(line))
-	{
 		printf("Error : input has an unknown character\n");
-		return (1);
-	}
 	else if (!splitsize(line) || !ft_strncmp(line[0], "\n", 2))
 		return (0);
 	else if (ft_strncmp(line[0], "A", 1) == 0)
@@ -82,10 +79,8 @@ int	parse_line(t_scene *scene, char **line)
 	else if (ft_strncmp(line[0], "pa", 2) == 0)
 		return (parse_parabol(scene, line));
 	else
-	{
 		printf("Error : input has an unknown element\n");
-		return (1);
-	}
+	return (1);
 }
 
 t_scene	*parser(char *filename)
