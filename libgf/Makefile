@@ -10,8 +10,6 @@ OFILES = $(FILES:%=%.o)
 
 CFLAGS = -Wall -Wextra -Werror
 
-OPTIM = -O3
-
 INC = -I. -I..
 
 all: $(NAME)

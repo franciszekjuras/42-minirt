@@ -16,7 +16,7 @@ OFILES = $(FILES:%=src/%.o)
 HFILES = $(HEADERS:%=inc/%.h)
 OMAIN_ALL = $(MAIN_ALL:%=src/%.o)
 CFLAGS = -Wall -Wextra -Werror
-OPTIM = -O3
+OPTIM = -ggdb3
 export OPTIM
 INC = -I. -I./inc -I./mlx/include
 LIBS= -lgf -lft -lmlx42 -ldl -lglfw -lm
