@@ -6,7 +6,7 @@
 /*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:55:15 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/18 14:57:49 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/18 15:18:47 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ typedef struct s_object
 typedef struct s_scene
 {
 	t_camera	*camera;
-	t_light		*light;
 	t_ambient	*ambient;
+	t_list		*lights;
 	t_list		*objects;
 }	t_scene;
 

@@ -6,7 +6,7 @@
 /*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:42:23 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/18 14:59:47 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/18 15:18:43 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,6 @@ int	parse_light(t_scene *scene, char **line)
 		printf("Wrong light usage\n");
 		return (1);
 	}
-	if (scene->light != NULL)
-	{
-		printf("Light can only be declared once\n");
-		return (1);
-	}
 	light = malloc(sizeof(t_light));
 	error += parse_coordinates(&light->origin, line[1]);
 	light->brightness = ft_atof(line[2]);
@@ -66,7 +61,7 @@ int	parse_light(t_scene *scene, char **line)
 		return (1);
 	}
 	error += parse_color(&light->color, line[3]);
-	scene->light = light;
+	ft_lstadd_back(&scene->lights, ft_lstnew(light));
 	return (error);
 }
 

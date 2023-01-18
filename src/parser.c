@@ -6,7 +6,7 @@
 /*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:55:10 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/18 14:26:30 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/18 15:20:10 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	init_scene(t_scene *scene)
 {
 	scene->camera = NULL;
-	scene->light = NULL;
+	scene->lights = NULL;
 	scene->ambient = NULL;
 	scene->objects = NULL;
 }

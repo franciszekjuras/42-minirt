@@ -6,7 +6,7 @@
 /*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 23:29:44 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/18 15:01:11 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/18 15:29:38 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static void	add_spot_light(t_gf_color *res,
 	t_gf_color	spot_color;
 	double		specular_factor;
 
-// TODO: set to spot light color (now hardcoded)
 	spot_color = gf_rgb(s.light->color.r, s.light->color.g, s.light->color.b);
 	uniform = gf_color_ch_mult(cast.obj->color, spot_color,
 			s.l_dot_n * s.light->brightness);
@@ -47,24 +46,30 @@ static void	add_spot_light(t_gf_color *res,
 
 t_gf_color	shader(t_data *data, t_cast cast, t_v3 viewer)
 {
+	t_list		*lights;
 	t_gf_color	res;
 	t_spot_ctx	s;
 
+	lights = data->scene->lights;
 	res = gf_color_ch_mult(cast.obj->color,
 			data->scene->ambient->color, data->scene->ambient->brightness);
-	s.light = data->scene->light;
-	s.l = v3_sub(s.light->origin, cast.p);
-	s.l_dist = v3_len(s.l);
-	s.l = v3_mult(s.l, 1. / s.l_dist);
-	s.l_dot_n = v3_dot(s.l, cast.n);
-	if (s.l_dot_n > 0.)
+	while (lights != NULL)
 	{
-		s.shadow_cast = scene_cast_except(data->scene->objects,
-				cast.obj, cast.p, s.l);
-		if (s.shadow_cast.obj == NULL || s.shadow_cast.t > s.l_dist)
+		s.light = lights->content;
+		s.l = v3_sub(s.light->origin, cast.p);
+		s.l_dist = v3_len(s.l);
+		s.l = v3_mult(s.l, 1. / s.l_dist);
+		s.l_dot_n = v3_dot(s.l, cast.n);
+		if (s.l_dot_n > 0.)
 		{
-			add_spot_light(&res, cast, s, viewer);
+			s.shadow_cast = scene_cast_except(data->scene->objects,
+					cast.obj, cast.p, s.l);
+			if (s.shadow_cast.obj == NULL || s.shadow_cast.t > s.l_dist)
+			{
+				add_spot_light(&res, cast, s, viewer);
+			}
 		}
+		lights = lights->next;
 	}
 	return (res);
 }
