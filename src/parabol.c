@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 23:26:18 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/18 00:45:45 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/18 08:22:53 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@
 // 		return (cyl_cap(obj, &q, o, d));
 // }
 
-t_cast	parabol_cast(t_object *obj, t_cylinder *cyl, t_v3 o, t_v3 d)
+t_cast	parabol_cast(t_object *obj, t_parabol *cyl, t_v3 o, t_v3 d)
 {
 	t_cast	cast;
 
