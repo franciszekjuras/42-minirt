@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shader.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 23:29:44 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/18 13:03:41 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/18 15:01:11 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	add_spot_light(t_gf_color *res,
 	double		specular_factor;
 
 // TODO: set to spot light color (now hardcoded)
-	spot_color = gf_rgb(255., 255., 255.);
+	spot_color = gf_rgb(s.light->color.r, s.light->color.g, s.light->color.b);
 	uniform = gf_color_ch_mult(cast.obj->color, spot_color,
 			s.l_dot_n * s.light->brightness);
 	specular_factor = calc_specular_factor(s.l_dot_n, s.l, cast.n, viewer);

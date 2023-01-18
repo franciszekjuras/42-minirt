@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:55:15 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/18 00:21:22 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/18 14:57:49 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ typedef struct s_camera
 
 typedef struct s_light
 {
-	t_v3	origin;
-	double	brightness;
+	t_gf_color	color;
+	t_v3		origin;
+	double		brightness;
 }	t_light;
 
 typedef struct s_ambient

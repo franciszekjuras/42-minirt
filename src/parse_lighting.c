@@ -6,7 +6,7 @@
 /*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:42:23 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/12 15:18:40 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/18 14:59:47 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	parse_light(t_scene *scene, char **line)
 	int		error;
 
 	error = 0;
-	if (splitsize(line) != 3)
+	if (splitsize(line) != 4)
 	{
 		printf("Wrong light usage\n");
 		return (1);
@@ -65,6 +65,7 @@ int	parse_light(t_scene *scene, char **line)
 		printf("Brightness ratio has to be in range [0.0,1.0]\n");
 		return (1);
 	}
+	error += parse_color(&light->color, line[3]);
 	scene->light = light;
 	return (error);
 }
