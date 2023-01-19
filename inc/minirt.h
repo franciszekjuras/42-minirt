@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 21:17:37 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/18 12:38:26 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/19 19:26:23 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,11 @@ typedef struct s_cyl_qtx
 	t_v3		v;
 	t_v3		p_c1;
 	t_v3		p_c2;
+	double		quad_c;
 	double		m1;
 	double		m2;
 	double		m_max;
+	int			parallel_hit;
 }	t_cyl_qtx;
 
 typedef struct s_par_qtx
