@@ -1,81 +1,75 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 12:55:13 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/14 18:50:25 by fjuras           ###   ########.fr       */
+/*   Created: 2022/05/19 20:38:30 by fjuras            #+#    #+#             */
+/*   Updated: 2023/01/18 16:46:22 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+#include <math.h>
+#include <MLX42/MLX42.h>
+#include <libft/libft.h>
+#include <libgf/gf.h>
+#include "minirt.h"
 #include "parser.h"
 
-static void	parser_test(t_scene *scene)
+void	hook(void *param)
 {
-	t_list		*lst = scene->objects;
-	t_object	*object;
+	static int	height = 0;
+	static int	width = 0;
+	static int	exit = 0;
+	t_data		*data;
 
-	if (scene->camera)
+	data = param;
+	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
+		exit = 1;
+	else if (exit)
+		mlx_close_window(data->mlx);
+	if (data->mlx->height != height || data->mlx->width != width)
 	{
-		printf("C %f,%f,%f %f,%f,%f %i\n", scene->camera->origin.x, scene->camera->origin.y, scene->camera->origin.z,
-		scene->camera->orientation.x, scene->camera->orientation.y, scene->camera->orientation.z,
-		scene->camera->fov);
+		height = data->mlx->height;
+		width = data->mlx->width;
+		mlx_resize_image(data->canvas, data->mlx->width, data->mlx->height);
+		gf_camera_set_res(&data->cam, data->mlx->width, data->mlx->height);
+		render(data);
 	}
-	if (scene->light)
-	{
-		printf("L %f,%f,%f %f\n", scene->light->origin.x, scene->light->origin.y, scene->light->origin.z,
-		scene->light->brightness);
-	}
-	if (scene->ambient)
-	{
-		printf("A %f %f,%f,%f\n", scene->ambient->brightness,
-		scene->ambient->color.x, scene->ambient->color.y, scene->ambient->color.z);
-	}
-	while (lst)
-	{
-		object = lst->content;
-		if (object->type == PLANE)
-		{
-			t_plane	*plane;
-			plane = object->content;
-			printf("pl %f,%f,%f %f,%f,%f %f,%f,%f\n", plane->origin.x, plane->origin.y, plane->origin.z,
-			plane->orientation.x, plane->orientation.y, plane->orientation.z,
-			object->color.x, object->color.y, object->color.z);
-		}
-		else if (object->type == SPHERE)
-		{
-			t_sphere	*sphere;
-			sphere = object->content;
-			printf("sp %f,%f,%f %f %f,%f,%f\n", sphere->origin.x, sphere->origin.y, sphere->origin.z,
-			sphere->radius *2, object->color.x, object->color.y, object->color.z);
-		}
-		else if (object->type == CYLINDER)
-		{
-			t_cylinder	*cylinder;
-			cylinder = object->content;
-			printf("cy %f,%f,%f %f,%f,%f %f %f %f,%f,%f\n", cylinder->origin.x, cylinder->origin.y, cylinder->origin.z,
-			cylinder->orientation.x, cylinder->orientation.y, cylinder->orientation.z,
-			cylinder->radius * 2, cylinder->height, object->color.x, object->color.y, object->color.z);
-		}
-		lst = lst->next;
-	}
+}
+
+int	minirt(char *filename)
+{
+	t_data		data;
+
+	data.scene = parser(filename);
+	if (!data.scene)
+		return (1);
+	data.mlx = mlx_init(800, 600, "MLX42", true);
+	if (!data.mlx)
+		return (1);
+	data.canvas = mlx_new_image(data.mlx, data.mlx->width, data.mlx->height);
+	mlx_image_to_window(data.mlx, data.canvas, 0, 0);
+	data.cam = gf_camera_new(data.scene->camera->fov,
+			data.scene->camera->origin, data.scene->camera->orientation);
+	gf_camera_set_res(&data.cam, data.canvas->width, data.canvas->height);
+	mlx_loop_hook(data.mlx, hook, &data);
+	mlx_loop(data.mlx);
+	mlx_delete_image(data.mlx, data.canvas);
+	mlx_terminate(data.mlx);
+	free_scene(data.scene);
+	return (0);
 }
 
 int	main(int argc, char **argv)
 {
-	t_scene	*scene;
-
 	if (argc != 2)
 	{
-		printf("Usage : ./miniRT scene.rt\n");
+		printf("Usage : ./miniRT *.rt\n");
 		return (1);
 	}
-	scene = parser(argv[1]);
-	if (!scene)
-		return (1);
-	parser_test(scene);
-	free_scene(scene);
+	minirt(argv[1]);
 	return (0);
 }

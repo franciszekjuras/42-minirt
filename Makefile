@@ -1,10 +1,7 @@
 NAME = minirt
 
-MAIN_ALL := main main2
-MAIN := main2
-
 FILES = \
-	$(MAIN) \
+	main \
 	free_scene parser parser_utils parse_lighting parse_objects \
 	parse_parameters get_next_line get_next_line_utils quad_solver\
 	render shader cast sphere plane cylinder parabol parser_util
@@ -37,7 +34,7 @@ $(LIBS_FILES): FORCE
 FORCE: ;
 
 clean_:
-	rm -f $(OFILES) $(OMAIN_ALL)
+	rm -f $(OFILES)
 
 clean: clean_libs clean_
 
