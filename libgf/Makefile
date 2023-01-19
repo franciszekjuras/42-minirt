@@ -4,7 +4,7 @@ FILES = \
 	gf_camera gf_color gf_color2 \
 	gf_strtodouble gf_utils \
 	gf_vector gf_vector2 gf_vector3 \
-	cplx cplx2 cplx3
+	cplx cplx2 cplx3 gf_img
 
 OFILES = $(FILES:%=%.o)
 

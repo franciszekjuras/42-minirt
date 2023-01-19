@@ -6,21 +6,20 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 21:17:37 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/19 19:26:23 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/19 22:03:12 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include <MLX42/MLX42.h>
+# include <mlx/mlx.h>
 # include <libgf/gf.h>
 # include "input.h"
 
 typedef struct s_data
 {
-	mlx_t		*mlx;
-	mlx_image_t	*canvas;
+	t_gf_ctx	ctx;
 	t_gf_camera	cam;
 	t_scene		*scene;
 }	t_data;
