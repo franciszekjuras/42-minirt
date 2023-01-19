@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 21:17:37 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/19 22:03:12 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/19 22:48:12 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,10 @@ t_quad_sol	quad_solver_a1(double b_half, double c);
 void		render(t_data *data);
 /*shader.c*/
 t_gf_color	shader(t_data *data, t_cast cast, t_v3 viewer);
+/*hooks.c*/
+int			close_app(t_gf_ctx *ctx);
+int			handle_key(int keycode, t_gf_ctx *ctx);
+/*utils.c*/
+void		parse_integer_params(int *arr, t_ft_argparse *arg, int num);
 
 #endif

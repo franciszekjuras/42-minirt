@@ -3,8 +3,9 @@ NAME = minirt
 FILES = \
 	main \
 	free_scene parser parser_utils parse_lighting parse_objects \
-	parse_parameters get_next_line get_next_line_utils quad_solver\
-	render shader cast sphere plane cylinder parabol parser_util
+	parse_parameters get_next_line get_next_line_utils quad_solver \
+	render shader cast sphere plane cylinder parabol parser_util \
+	utils hooks
 
 HEADERS= \
 	minirt input parser get_next_line
