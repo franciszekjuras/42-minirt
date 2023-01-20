@@ -6,7 +6,7 @@
 /*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:38:30 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/20 14:56:36 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/20 15:11:35 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,29 @@
 #include <libgf/gf_keys.h>
 #include "minirt.h"
 #include "parser.h"
+
+static int	check_scene(t_scene *scene)
+{
+	if (!scene->camera)
+	{
+		printf("Error : undefined camera\n");
+		free_scene(scene);
+		return (1);
+	}
+	if (!scene->ambient)
+	{
+		printf("Error : undefined ambient lighting\n");
+		free_scene(scene);
+		return (1);
+	}
+	if (!scene->lights)
+	{
+		printf("Error : undefined lights\n");
+		free_scene(scene);
+		return (1);
+	}
+	return (0);
+}
 
 static void	context_init_window(t_gf_ctx *ctx, t_ft_argparse *args)
 {
@@ -55,7 +78,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	data.scene = parser(arg->params[0]);
-	if (data.scene == NULL)
+	if (data.scene == NULL || check_scene(data.scene))
 		return (1);
 	data.ctx.mlx = mlx_init();
 	context_init_window(&data.ctx, args);
