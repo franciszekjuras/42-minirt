@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:38:30 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/19 22:52:11 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/20 14:56:36 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	main(int argc, char **argv)
 	data.cam = gf_camera_new(data.scene->camera->fov,
 			data.scene->camera->origin, data.scene->camera->orientation);
 	gf_camera_set_res(&data.cam, data.ctx.w, data.ctx.h);
+	mlx_hook(data.ctx.win, ConfigureNotify, StructureNotifyMask, &on_resize, &data);
 	render(&data);
 	mlx_loop(data.ctx.mlx);
 }

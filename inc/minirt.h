@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 21:17:37 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/19 22:48:12 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/20 14:56:36 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ t_gf_color	shader(t_data *data, t_cast cast, t_v3 viewer);
 /*hooks.c*/
 int			close_app(t_gf_ctx *ctx);
 int			handle_key(int keycode, t_gf_ctx *ctx);
+int			on_resize(t_data *data);
 /*utils.c*/
 void		parse_integer_params(int *arr, t_ft_argparse *arg, int num);
 
