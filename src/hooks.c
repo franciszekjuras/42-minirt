@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 22:44:25 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/20 14:56:47 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/20 14:35:10 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	close_app(t_gf_ctx *ctx)
 
 int	on_resize(t_data *data)
 {
-	render(data);
+	gf_img_put(&data->ctx, &data->ctx.img);
 	return (0);
 }
 
