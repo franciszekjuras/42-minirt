@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:38:30 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/20 15:21:19 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/20 15:46:52 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,14 @@ static void	setup_hooks(t_data *data)
 		ConfigureNotify, StructureNotifyMask, &on_resize, &data->ctx);
 }
 
+static int	cleanup_err(t_ft_argparse	*args, const char *msg)
+{
+	ft_argparse_free(args);
+	if (msg != NULL)
+		ft_dprintf(2, "%s\n", msg);
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data			data;
@@ -82,13 +90,10 @@ int	main(int argc, char **argv)
 	args = ft_argparse(argc, argv);
 	arg = ft_argparse_find(args, '-');
 	if (arg == NULL || arg->count > 1)
-	{
-		ft_dprintf(2, "minirt requires one positional argument: <scene> \n");
-		return (1);
-	}
+		return (cleanup_err(args, "Error: no required argument: <scene>"));
 	data.scene = parser(arg->params[0]);
 	if (data.scene == NULL || check_scene(data.scene))
-		return (1);
+		return (cleanup_err(args, NULL));
 	data.ctx.mlx = mlx_init();
 	context_init_window(&data.ctx, args);
 	ft_argparse_free(args);
