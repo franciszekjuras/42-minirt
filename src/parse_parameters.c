@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:06:11 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/16 17:38:01 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/20 21:18:07 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,9 @@ int	parse_color(t_gf_color *color, char *line)
 	color->r = ft_atof(split[0]);
 	color->g = ft_atof(split[1]);
 	color->b = ft_atof(split[2]);
-	if (color->r < 0 || color->r > 255
-		|| color->g < 0 || color->g > 255
-		|| color->b < 0 || color->b > 255)
+	if (color->r < 0 || color->g < 0 || color->b < 0)
 	{
-		printf("RGB components have to be in range [0,255]\n");
+		printf("RGB components have to be non-negative\n");
 		return (1);
 	}
 	free_split(split);

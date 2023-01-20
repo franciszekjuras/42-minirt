@@ -14,7 +14,7 @@ OFILES = $(FILES:%=src/%.o)
 HFILES = $(HEADERS:%=inc/%.h)
 OMAIN_ALL = $(MAIN_ALL:%=src/%.o)
 CFLAGS = -Wall -Wextra -Werror
-OPTIM = -ggdb3
+OPTIM = -O3 -ffast-math
 export OPTIM
 INC = -I. -I./inc
 LIBS= -lgf -lft -lmlx -lXext -lX11 -lm

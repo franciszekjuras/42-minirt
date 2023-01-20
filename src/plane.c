@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 18:47:16 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/18 21:00:17 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/20 21:47:55 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_cast	plane_cast(t_object *obj, t_plane *pln, t_v3 o, t_v3 d)
 
 	cast.obj = NULL;
 	denom = v3_dot(pln->orientation, d);
+	if (denom == 0.)
+		return (cast);
 	x = v3_sub(pln->origin, o);
 	cast.t = v3_dot(x, pln->orientation) / denom;
 	if (cast.t >= 0)

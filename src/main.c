@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:38:30 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/20 16:12:54 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/20 21:18:25 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int	cleanup_err(t_ft_argparse	*args, const char *msg)
 {
 	ft_argparse_free(args);
 	if (msg != NULL)
-		printf(2, "%s\n", msg);
+		printf("%s\n", msg);
 	return (1);
 }
 

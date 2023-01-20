@@ -2,3 +2,4 @@ minirt
 *.code-workspace
 *.o
 *.a
+*.py
