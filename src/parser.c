@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:55:10 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/18 16:49:53 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/20 16:56:46 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	check_file(char *filename)
 	end_len = ft_strlen(end);
 	name_len = ft_strlen(filename);
 	i = 0;
-	while (i < end_len)
+	while (i <= end_len)
 	{
 		if (filename[name_len - i] != end[end_len - i])
 			return (0);

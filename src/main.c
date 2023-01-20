@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:38:30 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/20 15:46:52 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/20 16:56:24 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	setup_hooks(t_data *data)
 {
 	mlx_do_key_autorepeatoff(data->ctx.mlx);
 	mlx_hook(data->ctx.win, DestroyNotify, 0, &close_app, data);
-	mlx_hook(data->ctx.win, KeyPress, KeyPressMask, &handle_key, data);
+	mlx_key_hook(data->ctx.win, &handle_key, data);
 	mlx_hook(data->ctx.win,
 		ConfigureNotify, StructureNotifyMask, &on_resize, &data->ctx);
 }
