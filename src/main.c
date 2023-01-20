@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:38:30 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/20 15:11:35 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/20 14:46:15 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,14 @@ static void	context_init_window(t_gf_ctx *ctx, t_ft_argparse *args)
 	ctx->img = gf_img(ctx->mlx, ctx->w, ctx->h);
 }
 
+static void	setup_hooks(t_data *data)
+{
+	mlx_hook(data->ctx.win, DestroyNotify, 0, &close_app, &data->ctx);
+	mlx_hook(data->ctx.win, KeyPress, KeyPressMask, &handle_key, &data->ctx);
+	mlx_hook(data->ctx.win,
+		ConfigureNotify, StructureNotifyMask, &on_resize, &data->ctx);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data			data;
@@ -83,12 +91,10 @@ int	main(int argc, char **argv)
 	data.ctx.mlx = mlx_init();
 	context_init_window(&data.ctx, args);
 	ft_argparse_free(args);
-	mlx_hook(data.ctx.win, DestroyNotify, 0, &close_app, &data.ctx);
-	mlx_hook(data.ctx.win, KeyPress, KeyPressMask, &handle_key, &data.ctx);
 	data.cam = gf_camera_new(data.scene->camera->fov,
 			data.scene->camera->origin, data.scene->camera->orientation);
 	gf_camera_set_res(&data.cam, data.ctx.w, data.ctx.h);
-	mlx_hook(data.ctx.win, ConfigureNotify, StructureNotifyMask, &on_resize, &data);
 	render(&data);
+	setup_hooks(&data);
 	mlx_loop(data.ctx.mlx);
 }

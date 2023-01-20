@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 22:44:25 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/20 14:35:10 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/20 14:44:13 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	close_app(t_gf_ctx *ctx)
 	return (0);
 }
 
-int	on_resize(t_data *data)
+int	on_resize(t_gf_ctx *ctx)
 {
-	gf_img_put(&data->ctx, &data->ctx.img);
+	gf_img_put(ctx, &ctx->img);
 	return (0);
 }
 
