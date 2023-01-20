@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 22:46:47 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/19 22:47:25 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/20 16:13:11 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	parse_integer_params(int *arr, t_ft_argparse *arg, int num)
 	}
 	if (i != num)
 	{
-		ft_dprintf(2,
+		printf(2,
 			"Argument -%c requires %d valid parameters, got only %d\n",
 			arg->arg, num, i);
 		exit(1);

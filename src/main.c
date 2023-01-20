@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:38:30 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/20 16:56:24 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/20 16:12:54 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int	cleanup_err(t_ft_argparse	*args, const char *msg)
 {
 	ft_argparse_free(args);
 	if (msg != NULL)
-		ft_dprintf(2, "%s\n", msg);
+		printf(2, "%s\n", msg);
 	return (1);
 }
 
