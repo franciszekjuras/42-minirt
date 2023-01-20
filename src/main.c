@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:38:30 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/20 14:46:15 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/20 15:57:44 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ static void	context_init_window(t_gf_ctx *ctx, t_ft_argparse *args)
 
 static void	setup_hooks(t_data *data)
 {
-	mlx_hook(data->ctx.win, DestroyNotify, 0, &close_app, &data->ctx);
-	mlx_hook(data->ctx.win, KeyPress, KeyPressMask, &handle_key, &data->ctx);
+	mlx_hook(data->ctx.win, DestroyNotify, 0, &close_app, data);
+	mlx_hook(data->ctx.win, KeyPress, KeyPressMask, &handle_key, data);
 	mlx_hook(data->ctx.win,
 		ConfigureNotify, StructureNotifyMask, &on_resize, &data->ctx);
 }
