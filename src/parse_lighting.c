@@ -6,7 +6,7 @@
 /*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:42:23 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/18 15:18:43 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/24 16:28:15 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	parse_camera(t_scene *scene, char **line)
 	if (camera->fov < 0 || camera->fov > 180)
 	{
 		printf("FOV has to be in range [0,180]\n");
+		scene->camera = camera;
 		return (1);
 	}
 	scene->camera = camera;
@@ -58,6 +59,7 @@ int	parse_light(t_scene *scene, char **line)
 	if (light->brightness < 0.0 || light->brightness > 1.0)
 	{
 		printf("Brightness ratio has to be in range [0.0,1.0]\n");
+		ft_lstadd_back(&scene->lights, ft_lstnew(light));
 		return (1);
 	}
 	error += parse_color(&light->color, line[3]);
@@ -86,6 +88,7 @@ int	parse_ambient_lighting(t_scene *scene, char **line)
 	if (alighting->brightness < 0.0 || alighting->brightness > 1.0)
 	{
 		printf("Ambient ligh ratio has to be in range [0.0,1.0]\n");
+		scene->ambient = alighting;
 		return (1);
 	}
 	error += parse_color(&alighting->color, line[2]);

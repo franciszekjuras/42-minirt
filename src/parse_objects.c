@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:02:58 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/18 00:38:27 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/24 16:35:44 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,11 @@ int	parse_cylinder(t_scene *scene, char **line)
 	cylinder->radius = ft_atof(line[3]) / 2;
 	cylinder->height = ft_atof(line[4]);
 	if (cylinder->height < 0 || cylinder->radius < 0)
+	{
+		object->content = cylinder;
+		ft_lstadd_back(&scene->objects, ft_lstnew(object));
 		return (printf("Cylinders cannot have negative diameter or height\n"));
+	}
 	error += parse_color(&object->color, line[5]);
 	object->content = cylinder;
 	object->type = CYLINDER;
@@ -99,7 +103,11 @@ int	parse_parabol(t_scene *scene, char **line)
 	prb->bottom = ft_atof(line[4]);
 	prb->top = ft_atof(line[5]);
 	if (prb->focus <= 0. || prb->bottom < 0. || prb->top <= prb->bottom)
+	{
+		object->content = prb;
+		ft_lstadd_back(&scene->objects, ft_lstnew(object));
 		return (printf("Invalid paraboloid specification\n"));
+	}
 	error += parse_color(&object->color, line[6]);
 	object->content = prb;
 	object->type = PARABOL;
