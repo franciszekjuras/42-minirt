@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:42:23 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/24 16:43:53 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/24 19:12:01 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	parse_camera(t_scene *scene, char **line)
 
 	error = 0;
 	if (splitsize(line) != 4)
-		return(cleanup("Wrong camera usage"));
+		return (cleanup("Wrong camera usage"));
 	if (scene->camera != NULL)
-		return(cleanup("Camera can only be declared once"));
+		return (cleanup("Camera can only be declared once"));
 	camera = malloc(sizeof(t_camera));
 	error += parse_coordinates(&camera->origin, line[1]);
 	error += parse_orientation(&camera->orientation, line[2]);
@@ -29,7 +29,7 @@ int	parse_camera(t_scene *scene, char **line)
 	if (camera->fov <= 0. || camera->fov > 180.)
 	{
 		free(camera);
-		return(cleanup("FOV has to be in range [0,180]"));
+		return (cleanup("FOV has to be in range [0,180]"));
 	}
 	scene->camera = camera;
 	return (error);

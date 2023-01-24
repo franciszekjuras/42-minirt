@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:55:10 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/24 16:45:51 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/24 19:15:10 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static int	check_file(char *filename)
 	end = ".rt";
 	end_len = ft_strlen(end);
 	name_len = ft_strlen(filename);
+	if (name_len <= end_len)
+		return (0);
 	i = 0;
 	while (i <= end_len)
 	{
@@ -47,13 +49,13 @@ static int	open_file(char *filename)
 	if (!check_file(filename))
 	{
 		printf("Error : scene file has to end with .rt\n");
-		exit(1);
+		return (-1);
 	}
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
 		printf("Error : couldn't open the file\n");
-		exit(1);
+		return (-1);
 	}
 	return (fd);
 }
@@ -85,29 +87,28 @@ int	parse_line(t_scene *scene, char **line)
 
 t_scene	*parser(char *filename)
 {
-	t_scene	*scene;
-	char	**split;
-	char	*line;
-	int		fd;
+	t_parse_data	d;
 
-	fd = open_file(filename);
-	scene = malloc(sizeof(t_scene));
-	init_scene(scene);
-	line = get_next_line(fd, 0);
-	while (line)
+	d.fd = open_file(filename);
+	if (d.fd < 0)
+		return (NULL);
+	d.scene = malloc(sizeof(t_scene));
+	init_scene(d.scene);
+	d.line = get_next_line(d.fd, 0);
+	while (d.line)
 	{
-		split = ft_split(line, ' ');
-		if (parse_line(scene, split))
+		d.split = ft_split(d.line, ' ');
+		if (parse_line(d.scene, d.split))
 		{
-			free_lines(line, split);
-			free_scene(scene);
-			get_next_line(fd, 1);
-			close(fd);
+			free_lines(d.line, d.split);
+			free_scene(d.scene);
+			get_next_line(d.fd, 1);
+			close(d.fd);
 			return (NULL);
 		}
-		free_lines(line, split);
-		line = get_next_line(fd, 0);
+		free_lines(d.line, d.split);
+		d.line = get_next_line(d.fd, 0);
 	}
-	close(fd);
-	return (scene);
+	close(d.fd);
+	return (d.scene);
 }

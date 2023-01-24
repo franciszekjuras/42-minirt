@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 21:17:37 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/20 15:56:35 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/24 19:03:44 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,6 @@ int			close_app(t_data *data);
 int			handle_key(int keycode, t_data *data);
 int			on_resize(t_gf_ctx *ctx);
 /*utils.c*/
-void		parse_integer_params(int *arr, t_ft_argparse *arg, int num);
+int			parse_integer_params(int *arr, t_ft_argparse *arg, int num);
 
 #endif

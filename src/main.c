@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:38:30 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/20 21:18:25 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/24 19:04:52 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ static void	context_init_window(t_gf_ctx *ctx, t_ft_argparse *args)
 	int				screen_size[2];
 
 	arg = ft_argparse_find(args, 's');
-	if (arg)
-		parse_integer_params(win_size, arg, 2);
-	else
+	if (!(arg != NULL && parse_integer_params(win_size, arg, 2)))
 	{
 		win_size[0] = 800;
 		win_size[1] = 600;

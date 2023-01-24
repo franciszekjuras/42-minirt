@@ -6,14 +6,14 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 22:46:47 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/20 21:19:10 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/24 19:14:22 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <libft/libft.h>
 
-void	parse_integer_params(int *arr, t_ft_argparse *arg, int num)
+int	parse_integer_params(int *arr, t_ft_argparse *arg, int num)
 {
 	int		i;
 	int		err;
@@ -32,6 +32,7 @@ void	parse_integer_params(int *arr, t_ft_argparse *arg, int num)
 	{
 		printf("Argument -%c requires %d valid parameters, got only %d\n",
 			arg->arg, num, i);
-		exit(1);
+		return (0);
 	}
+	return (1);
 }

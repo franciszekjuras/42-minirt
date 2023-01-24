@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:06:11 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/24 18:57:04 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/24 19:14:44 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	parse_orientation(t_v3 *point, char *line)
 		|| point->z < -1 || point->z > 1)
 	{
 		return (cleanup_split(split,
-			"Orientation vector values have to be in range [-1,1]"));
+				"Orientation vector values have to be in range [-1,1]"));
 	}
 	if (point->x == 0. && point->y == 0. && point->z == 0.)
 		return (cleanup_split(split, "Orientation vector must be non-zero"));
@@ -64,7 +64,7 @@ int	parse_color(t_gf_color *color, char *line)
 		|| color->r > 255. || color->g > 255. || color->b > 255.)
 	{
 		return (cleanup_split(split,
-			"RGB components must be in range [0, 255]"));
+				"RGB components must be in range [0, 255]"));
 	}
 	free_split(split);
 	return (0);
