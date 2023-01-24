@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:02:58 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/24 16:35:44 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/24 18:58:18 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,12 @@ int	parse_sphere(t_scene *scene, char **line)
 	object = malloc(sizeof(t_object));
 	error += parse_coordinates(&sphere->origin, line[1]);
 	sphere->radius = ft_atof(line[2]) / 2;
+	if (sphere->radius <= 0.)
+	{
+		object->content = sphere;
+		ft_lstadd_back(&scene->objects, ft_lstnew(object));
+		return (printf("Sphere must have positive diameter\n"));
+	}
 	error += parse_color(&object->color, line[3]);
 	object->content = sphere;
 	object->type = SPHERE;
@@ -73,11 +79,11 @@ int	parse_cylinder(t_scene *scene, char **line)
 	error += parse_orientation(&cylinder->orientation, line[2]);
 	cylinder->radius = ft_atof(line[3]) / 2;
 	cylinder->height = ft_atof(line[4]);
-	if (cylinder->height < 0 || cylinder->radius < 0)
+	if (cylinder->height <= 0. || cylinder->radius <= 0.)
 	{
 		object->content = cylinder;
 		ft_lstadd_back(&scene->objects, ft_lstnew(object));
-		return (printf("Cylinders cannot have negative diameter or height\n"));
+		return (printf("Cylinder must have positive diameter and height\n"));
 	}
 	error += parse_color(&object->color, line[5]);
 	object->content = cylinder;

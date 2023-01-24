@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_util.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 14:06:01 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/18 14:15:05 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/24 16:33:10 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,19 @@ int	check_line(char **split)
 		i++;
 	}
 	return (0);
+}
+
+int	cleanup(const char *msg)
+{
+	if (msg != NULL)
+		printf("%s\n", msg);
+	return (1);
+}
+
+int	cleanup_split(char **split, const char *msg)
+{
+	free_split(split);
+	if (msg != NULL)
+		printf("%s\n", msg);
+	return (1);
 }
