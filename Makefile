@@ -12,7 +12,6 @@ HEADERS= \
 
 OFILES = $(FILES:%=src/%.o)
 HFILES = $(HEADERS:%=inc/%.h)
-OMAIN_ALL = $(MAIN_ALL:%=src/%.o)
 CFLAGS = -Wall -Wextra -Werror
 OPTIM = -O3 -ffast-math
 export OPTIM

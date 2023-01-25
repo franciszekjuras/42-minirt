@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:38:30 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/24 19:04:52 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/25 19:34:06 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,11 @@ int	main(int argc, char **argv)
 	if (data.scene == NULL || check_scene(data.scene))
 		return (cleanup_err(args, NULL));
 	data.ctx.mlx = mlx_init();
+	if (data.ctx.mlx == NULL)
+	{
+		free_scene(data.scene);
+		return (cleanup_err(args, "Error: mlx initialization failed"));
+	}
 	context_init_window(&data.ctx, args);
 	ft_argparse_free(args);
 	data.cam = gf_camera_new(data.scene->camera->fov,
