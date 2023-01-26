@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 14:06:01 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/24 16:33:10 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/26 13:40:19 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	check_line(char **split)
 	int	i;
 	int	y;
 
+	if (split[0] == NULL)
+		return (0);
 	i = 1;
 	while (split[i])
 	{
