@@ -6,7 +6,7 @@
 /*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:42:23 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/26 16:49:33 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/26 16:53:53 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	brightness_check(char *nb)
 {
 	int	i;
-	
+
 	if (nb[0] == '1' && nb[1])
 		i = 2;
 	else if (nb[0] == '-' && nb[1] == '0')
@@ -65,7 +65,8 @@ int	parse_light(t_scene *scene, char **line)
 	light = malloc(sizeof(t_light));
 	error += parse_coordinates(&light->origin, line[1]);
 	light->brightness = ft_atof(line[2]);
-	if (light->brightness < 0.0 || light->brightness > 1.0 || brightness_check(line[2]))
+	if (light->brightness < 0.0 || light->brightness > 1.0
+		|| brightness_check(line[2]))
 	{
 		free(light);
 		printf("Brightness ratio has to be in range [0.0,1.0]\n");
@@ -88,7 +89,8 @@ int	parse_ambient_lighting(t_scene *scene, char **line)
 		return (cleanup("Ambient light can only be declared once"));
 	alighting = malloc(sizeof(t_ambient));
 	alighting->brightness = ft_atof(line[1]);
-	if (alighting->brightness < 0.0 || alighting->brightness > 1.0 || brightness_check(line[1]))
+	if (alighting->brightness < 0.0 || alighting->brightness > 1.0
+		|| brightness_check(line[1]))
 	{
 		free(alighting);
 		printf("Ambient light ratio has to be in range [0.0,1.0]\n");
