@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 18:38:47 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/13 20:31:09 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/26 15:35:32 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,10 @@ long long		ft_strtoll_e(
 					const char *np, char **ep, int base, int *err);
 t_ull			ft_strtoull_e(
 					const char *np, char **ep, int base, int *err);
+long long		ft_strptonum(
+					char **np, long long min, long long max, int *err);
 long long		ft_strtonum(
-					char **npp, long long min, long long max, int *err);
+					char *np, long long min, long long max, int *err);
 
 /**
  * @brief convert string to floating point number represented by integer

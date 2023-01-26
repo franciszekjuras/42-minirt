@@ -6,14 +6,13 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:38:30 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/25 21:21:31 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/26 17:04:12 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <math.h>
 #include <mlx/mlx.h>
-#include <X11/X.h>
 #include <libft/libft.h>
 #include <libgf/gf.h>
 #include <libgf/gf_keys.h>
@@ -62,13 +61,24 @@ static void	context_init_window(t_gf_ctx *ctx, t_ft_argparse *args)
 	ctx->img = gf_img(ctx->mlx, ctx->w, ctx->h);
 }
 
-static void	setup_hooks(t_data *data)
+static char	*get_scene_filename(t_ft_argparse	*arg)
 {
-	mlx_do_key_autorepeatoff(data->ctx.mlx);
-	mlx_hook(data->ctx.win, DestroyNotify, 0, &close_app, data);
-	mlx_key_hook(data->ctx.win, &handle_key, data);
-	mlx_hook(data->ctx.win,
-		ConfigureNotify, StructureNotifyMask, &on_resize, &data->ctx);
+	char	*filename;
+	int		len;
+
+	if (arg == NULL || arg->count > 1)
+	{
+		printf("Error: One positional arg required: <scene file>\n");
+		return (NULL);
+	}
+	filename = arg->params[0];
+	len = ft_strlen(filename);
+	if (len <= 3 || ft_strcmp(&filename[len - 3], ".rt") != 0)
+	{
+		printf("Error: <scene file> must have .rt extension\n");
+		return (NULL);
+	}
+	return (filename);
 }
 
 static int	cleanup_err(t_ft_argparse	*args, const char *msg)
@@ -83,13 +93,12 @@ int	main(int argc, char **argv)
 {
 	t_data			data;
 	t_ft_argparse	*args;
-	t_ft_argparse	*arg;
 
 	args = ft_argparse(argc, argv);
-	arg = ft_argparse_find(args, '-');
-	if (arg == NULL || arg->count > 1)
-		return (cleanup_err(args, "Error: no required argument: <scene>"));
-	data.scene = parser(arg->params[0]);
+	data.scene_filename = get_scene_filename(ft_argparse_find(args, '-'));
+	if (data.scene_filename == NULL)
+		return (cleanup_err(args, NULL));
+	data.scene = parser(data.scene_filename);
 	if (data.scene == NULL || check_scene(data.scene))
 		return (cleanup_err(args, NULL));
 	data.ctx.mlx = mlx_init();

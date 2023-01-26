@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 22:44:25 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/20 15:57:16 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/26 17:03:53 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <X11/X.h>
 #include "minirt.h"
 #include "parser.h"
 #include <libgf/gf_keys.h>
@@ -36,4 +37,13 @@ int	handle_key(int keycode, t_data *data)
 	if (GF_K_ESC == keycode)
 		close_app(data);
 	return (0);
+}
+
+void	setup_hooks(t_data *data)
+{
+	mlx_do_key_autorepeatoff(data->ctx.mlx);
+	mlx_hook(data->ctx.win, DestroyNotify, 0, &close_app, data);
+	mlx_key_hook(data->ctx.win, &handle_key, data);
+	mlx_hook(data->ctx.win,
+		ConfigureNotify, StructureNotifyMask, &on_resize, &data->ctx);
 }

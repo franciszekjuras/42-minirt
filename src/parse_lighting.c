@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_lighting.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:42:23 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/26 16:53:53 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/26 16:36:42 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	parse_camera(t_scene *scene, char **line)
 {
 	t_camera	*camera;
 	int			error;
+	int			numerr;
 
 	error = 0;
 	if (splitsize(line) != 4)
@@ -44,8 +45,8 @@ int	parse_camera(t_scene *scene, char **line)
 	camera = malloc(sizeof(t_camera));
 	error += parse_coordinates(&camera->origin, line[1]);
 	error += parse_orientation(&camera->orientation, line[2]);
-	camera->fov = ft_atoi(line[3]);
-	if (camera->fov <= 0. || camera->fov > 180.)
+	camera->fov = ft_strtonum(line[3], 0, 180, &numerr);
+	if (numerr)
 	{
 		free(camera);
 		return (cleanup("FOV has to be in range [0,180]"));

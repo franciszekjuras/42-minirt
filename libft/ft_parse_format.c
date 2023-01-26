@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 10:20:47 by fjuras            #+#    #+#             */
-/*   Updated: 2022/05/01 23:15:54 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/26 15:42:33 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	ft_parse_number(
 		*pos += 1;
 	}
 	else
-		n = ft_strtonum(pos, 0, INT_MAX, &err);
+		n = ft_strptonum(pos, 0, INT_MAX, &err);
 	if (err)
 		return (-1);
 	if (n < 0)

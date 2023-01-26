@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 21:17:37 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/24 19:03:44 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/26 16:50:12 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_data
 	t_gf_ctx	ctx;
 	t_gf_camera	cam;
 	t_scene		*scene;
+	char		*scene_filename;
 }	t_data;
 
 /**
@@ -104,6 +105,7 @@ t_gf_color	shader(t_data *data, t_cast cast, t_v3 viewer);
 int			close_app(t_data *data);
 int			handle_key(int keycode, t_data *data);
 int			on_resize(t_gf_ctx *ctx);
+void		setup_hooks(t_data *data);
 /*utils.c*/
 int			parse_integer_params(int *arr, t_ft_argparse *arg, int num);
 
