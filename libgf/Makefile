@@ -1,4 +1,5 @@
 NAME = libgf.a
+CC = gcc
 
 FILES = \
 	gf_camera gf_color gf_color2 \
@@ -18,7 +19,7 @@ $(NAME): $(OFILES)
 	ar rcs $@ $?
 
 $(OFILES): %.o: %.c
-	gcc $(CFLAGS) $(OPTIM) $(INC) -c $< -o $@
+	$(CC) $(CFLAGS) $(OPTIM) $(INC) -c $< -o $@
 
 clean:
 	rm -f $(OFILES)

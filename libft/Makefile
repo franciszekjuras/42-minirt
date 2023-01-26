@@ -1,4 +1,5 @@
 NAME = libft.a
+CC = gcc
 
 FILES = \
 	ft_alloc ft_mapi ft_math ft_math2 ft_membase ft_memcmp ft_memcpy ft_put \
@@ -21,7 +22,7 @@ $(NAME): $(OFILES)
 	ar rcs $@ $?
 
 $(OFILES): %.o: %.c
-	gcc $(CFLAGS) $(OPTIM) -c $< -o $@
+	$(CC) $(CFLAGS) $(OPTIM) -c $< -o $@
 
 clean:
 	rm -f $(OFILES)
