@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_parameters.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:06:11 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/26 17:08:33 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/27 14:53:32 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	orientation_check(char **split)
 {
-	int	i;
-	int	y;
+	size_t	i;
+	size_t	y;
 
 	i = 0;
 	while (split[i])
@@ -25,8 +25,8 @@ static int	orientation_check(char **split)
 		else if (split[i][0] == '-' && split[i][1] == '1')
 			y = 3;
 		else
-			y = -1;
-		while (split[i][y])
+			y = ft_strlen(split[i]);
+		while (y < ft_strlen(split[i]))
 		{
 			if (split[i][y] != '0')
 				return (1);
