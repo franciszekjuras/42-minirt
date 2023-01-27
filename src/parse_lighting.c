@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_lighting.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:42:23 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/26 16:36:42 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/27 15:26:43 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 static int	brightness_check(char *nb)
 {
-	int	i;
+	size_t	i;
 
-	if (nb[0] == '1' && nb[1])
+	if (nb[0] == '1')
 		i = 2;
 	else if (nb[0] == '-' && nb[1] == '0')
 		i = 3;
 	else
-		i = -1;
-	while (nb[i])
+		i = ft_strlen(nb);
+	while (i < ft_strlen(nb))
 	{
 		if (nb[i] != '0')
 			return (1);
