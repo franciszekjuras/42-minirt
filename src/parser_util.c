@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 14:06:01 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/26 13:40:19 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/27 16:12:02 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,21 @@ int	cleanup_split(char **split, const char *msg)
 	if (msg != NULL)
 		printf("%s\n", msg);
 	return (1);
+}
+
+int	is_atof_abs_just_gt_1(char *nb)
+{
+	char	*zeros;
+
+	if (ft_strncmp(nb, "1.", 2) == 0)
+		zeros = &nb[2];
+	else if (ft_strncmp(nb, "-1.", 3) == 0)
+		zeros = &nb[3];
+	else
+		return (0);
+	while (*zeros == '0')
+		++zeros;
+	if (*zeros != '\0')
+		return (1);
+	return (0);
 }

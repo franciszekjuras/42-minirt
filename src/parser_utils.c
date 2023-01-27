@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:45:43 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/12 14:08:43 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/27 16:26:32 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "parser.h"
 
 int	splitsize(char **split)
@@ -41,21 +42,21 @@ void	free_lines(char *line, char **split)
 	free_split(split);
 }
 
-static double	return_decimal(const char *nptr, int i)
+static double	return_decimal(const char *nptr, int *i)
 {
 	double	sum;
 	double	devider;
 
-	if (nptr[i] != '.')
+	if (nptr[*i] != '.')
 		return (0);
-	i++;
+	++(*i);
 	sum = 0;
 	devider = 10;
-	while (nptr[i] >= '0' && nptr[i] <= '9')
+	while (nptr[*i] >= '0' && nptr[*i] <= '9')
 	{
-		sum = sum + ((nptr[i] - '0') / devider);
+		sum = sum + ((nptr[*i] - '0') / devider);
 		devider = devider * 10;
-		i++;
+		++(*i);
 	}
 	return (sum);
 }
@@ -69,21 +70,22 @@ double	ft_atof(const char *nptr)
 	sum = 0;
 	negative = 1;
 	i = 0;
-	while (nptr[i] == '\t' || nptr[i] == '\n' || nptr[i] == '\v'
-		|| nptr[i] == '\f' || nptr[i] == '\r' || nptr[i] == ' ')
+	while (ft_isspace(nptr[i]))
 		i++;
+	if (nptr[i] == '-')
+		negative = -1;
 	if (nptr[i] == '-' || nptr[i] == '+')
-	{
-		if (nptr[i] == '-')
-			negative = -1;
-		i++;
-	}
+		++i;
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
 		sum = sum * 10 + (nptr[i] - '0');
 		i++;
 	}
-	sum = sum + return_decimal(nptr, i);
+	sum = sum + return_decimal(nptr, &i);
 	sum = sum * negative;
+	while (ft_isspace(nptr[i]))
+		i++;
+	if (nptr[i] != '\0')
+		return (NAN);
 	return (sum);
 }

@@ -6,10 +6,11 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:02:58 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/26 12:39:18 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/27 16:20:50 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "parser.h"
 
 int	parse_plane(t_scene *scene, char **line)
@@ -51,7 +52,7 @@ int	parse_sphere(t_scene *scene, char **line)
 	object = malloc(sizeof(t_object));
 	error += parse_coordinates(&sphere->origin, line[1]);
 	sphere->radius = ft_atof(line[2]) / 2;
-	if (sphere->radius <= 0.)
+	if (!isfinite(sphere->radius) || sphere->radius <= 0.)
 	{
 		object->content = sphere;
 		ft_lstadd_back(&scene->objects, ft_lstnew(object));
@@ -79,7 +80,8 @@ int	parse_cylinder(t_scene *scene, char **line)
 	error += parse_orientation(&cylinder->orientation, line[2]);
 	cylinder->radius = ft_atof(line[3]) / 2;
 	cylinder->height = ft_atof(line[4]);
-	if (cylinder->height <= 0. || cylinder->radius <= 0.)
+	if (!isfinite(cylinder->radius) || cylinder->height <= 0.
+		|| !isfinite(cylinder->height) || cylinder->radius <= 0.)
 	{
 		object->content = cylinder;
 		ft_lstadd_back(&scene->objects, ft_lstnew(object));
@@ -103,20 +105,20 @@ int	parse_parabol(t_scene *scene, char **line)
 		return (printf("Wrong paraboloid usage\n"));
 	prb = malloc(sizeof(t_parabol));
 	object = malloc(sizeof(t_object));
+	object->content = prb;
+	object->type = PARABOL;
 	error += parse_coordinates(&prb->origin, line[1]);
 	error += parse_orientation(&prb->orientation, line[2]);
 	prb->focus = ft_atof(line[3]);
 	prb->bottom = ft_atof(line[4]);
 	prb->top = ft_atof(line[5]);
-	if (prb->focus <= 0. || prb->bottom < 0. || prb->top <= prb->bottom)
+	if (!isfinite(prb->focus) || !isfinite(prb->bottom) || !isfinite(prb->top)
+		|| prb->focus <= 0. || prb->bottom < 0. || prb->top <= prb->bottom)
 	{
-		object->content = prb;
 		ft_lstadd_back(&scene->objects, ft_lstnew(object));
 		return (printf("Invalid paraboloid specification\n"));
 	}
 	error += parse_color(&object->color, line[6]);
-	object->content = prb;
-	object->type = PARABOL;
 	ft_lstadd_back(&scene->objects, ft_lstnew(object));
 	return (error);
 }

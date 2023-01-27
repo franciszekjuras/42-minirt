@@ -3,35 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   parse_parameters.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:06:11 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/27 14:53:32 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/27 16:25:36 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "parser.h"
 
 static int	orientation_check(char **split)
 {
 	size_t	i;
-	size_t	y;
 
 	i = 0;
 	while (split[i])
 	{
-		if (split[i][0] == '1')
-			y = 2;
-		else if (split[i][0] == '-' && split[i][1] == '1')
-			y = 3;
-		else
-			y = ft_strlen(split[i]);
-		while (y < ft_strlen(split[i]))
-		{
-			if (split[i][y] != '0')
-				return (1);
-			y++;
-		}
+		if (is_atof_abs_just_gt_1(split[i]))
+			return (1);
 		i++;
 	}
 	return (0);
@@ -47,6 +37,8 @@ int	parse_coordinates(t_v3 *point, char *line)
 	point->x = ft_atof(split[0]);
 	point->y = ft_atof(split[1]);
 	point->z = ft_atof(split[2]);
+	if (!isfinite(point->x) || !isfinite(point->x) || !isfinite(point->x))
+		return (cleanup_split(split, "Invalid coordinate argument"));
 	free_split(split);
 	return (0);
 }
@@ -61,9 +53,9 @@ int	parse_orientation(t_v3 *point, char *line)
 	point->x = ft_atof(split[0]);
 	point->y = ft_atof(split[1]);
 	point->z = ft_atof(split[2]);
-	if (point->x < -1 || point->x > 1
-		|| point->y < -1 || point->y > 1
-		|| point->z < -1 || point->z > 1
+	if (!isfinite(point->x) || point->x < -1 || point->x > 1
+		|| !isfinite(point->y) || point->y < -1 || point->y > 1
+		|| !isfinite(point->z) || point->z < -1 || point->z > 1
 		|| orientation_check(split))
 	{
 		return (cleanup_split(split,

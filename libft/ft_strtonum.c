@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 23:03:34 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/26 15:34:49 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/27 15:27:14 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,14 @@ long long	ft_strptonum(
 long long	ft_strtonum(
 				char *np, long long min, long long max, int *err)
 {
-	char	*np_copy;
+	long long	r;
 
-	np_copy = np;
-	return (ft_strptonum(&np_copy, min, max, err));
+	r = ft_strptonum(&np, min, max, err);
+	if (*err)
+		return (r);
+	while (ft_isspace(*np))
+		++np;
+	if (*np != '\0')
+		*err = FT_STRTOI_INVCHAR;
+	return (r);
 }

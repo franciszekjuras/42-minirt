@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:32:40 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/24 19:11:44 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/27 16:12:07 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ double	ft_atof(const char *nptr);
 int		check_line(char **split);
 int		cleanup_split(char **split, const char *msg);
 int		cleanup(const char *msg);
+int		is_atof_abs_just_gt_1(char *nb);
 
 // parse_objects.c
 int		parse_sphere(t_scene *scene, char **line);

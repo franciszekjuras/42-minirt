@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 18:38:47 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/26 15:35:32 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/27 15:27:35 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ typedef enum e_strtoi_err
 {
 	FT_STRTOI_BASE = 0x01,
 	FT_STRTOI_OVERFLOW = 0x02,
-	FT_STRTOI_EMPTY = 0x04
+	FT_STRTOI_EMPTY = 0x04,
+	FT_STRTOI_INVCHAR = 0x08
 }	t_strtoi_err;
 
 typedef struct s_ft_argparse

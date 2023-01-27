@@ -17,7 +17,7 @@ SAN_FLAGS = -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all \
 			-fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow \
 			-fno-sanitize=null -fno-sanitize=alignment
 export SAN_FLAGS
-OPTIM = -O3 -ffast-math
+OPTIM = -Og
 export OPTIM
 INC = -I. -I./inc
 LIBS= -lgf -lft -lmlx -lXext -lX11 -lm
