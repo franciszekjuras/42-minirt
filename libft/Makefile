@@ -22,7 +22,7 @@ $(NAME): $(OFILES)
 	ar rcs $@ $?
 
 $(OFILES): %.o: %.c
-	$(CC) $(CFLAGS) $(OPTIM) -c $< -o $@
+	$(CC) $(CFLAGS) $(SAN_FLAGS) $(OPTIM) -c $< -o $@
 
 clean:
 	rm -f $(OFILES)

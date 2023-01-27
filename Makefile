@@ -13,6 +13,10 @@ HEADERS= \
 OFILES = $(FILES:%=src/%.o)
 HFILES = $(HEADERS:%=inc/%.h)
 CFLAGS = -Wall -Wextra -Werror
+# SAN_FLAGS = -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all \
+# 			-fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow \
+# 			-fno-sanitize=null -fno-sanitize=alignment
+export SAN_FLAGS
 OPTIM = -O3 -ffast-math
 export OPTIM
 INC = -I. -I./inc
@@ -23,10 +27,10 @@ LIBS_DIRS = $(addprefix -L, $(dir $(LIBS_FILES)))
 all: $(NAME)
 
 $(NAME): $(OFILES) $(LIBS_FILES)
-	gcc $(LIBS_DIRS) $(OFILES) $(LIBS) -o $@
+	gcc $(LIBS_DIRS) $(SAN_FLAGS) $(OFILES) $(LIBS) -o $@
 
 $(OFILES): %.o: %.c $(HFILES)
-	gcc $(CFLAGS) $(OPTIM) $(INC) -c $< -o $@
+	gcc $(CFLAGS) $(SAN_FLAGS) $(OPTIM) $(INC) -c $< -o $@
 
 $(LIBS_FILES): FORCE
 	make -C $(dir $@)
