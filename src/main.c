@@ -6,7 +6,7 @@
 /*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:38:30 by fjuras            #+#    #+#             */
-/*   Updated: 2023/01/26 17:04:12 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/28 19:15:51 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ static char	*get_scene_filename(t_ft_argparse	*arg)
 	}
 	filename = arg->params[0];
 	len = ft_strlen(filename);
-	if (len <= 3 || ft_strcmp(&filename[len - 3], ".rt") != 0)
+	if (len <= 3 || ft_strcmp(&filename[len - 3], ".rt") != 0
+		|| ft_strcmp(&filename[len - 4], "/.rt") == 0)
 	{
 		printf("Error: <scene file> must have .rt extension\n");
 		return (NULL);
