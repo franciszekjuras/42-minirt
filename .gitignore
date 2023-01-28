@@ -1,4 +1,5 @@
-minirt
+miniRT
+*afl*
 *.code-workspace
 *.o
 *.a
