@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 12:34:40 by jkarosas          #+#    #+#             */
-/*   Updated: 2022/12/06 16:42:08 by jkarosas         ###   ########.fr       */
+/*   Updated: 2023/01/28 00:26:47 by fjuras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ char	*get_next_line(int fd, int flag)
 	if (flag == 1)
 	{
 		free(save);
+		save = NULL;
 		return (NULL);
 	}
 	if (fd < 0)
