@@ -1,4 +1,5 @@
 NAME = miniRT
+CC=gcc
 
 FILES = \
 	main \
@@ -13,11 +14,11 @@ HEADERS= \
 OFILES = $(FILES:%=src/%.o)
 HFILES = $(HEADERS:%=inc/%.h)
 CFLAGS = -Wall -Wextra -Werror
-SAN_FLAGS = -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all \
-			-fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow \
-			-fno-sanitize=null -fno-sanitize=alignment
-export SAN_FLAGS
-OPTIM = -Og
+# SAN_FLAGS = -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all \
+# 			-fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow \
+# 			-fno-sanitize=null -fno-sanitize=alignment
+# export SAN_FLAGS
+OPTIM = -O3 -ffast-math
 export OPTIM
 INC = -I. -I./inc
 LIBS= -lgf -lft -lmlx -lXext -lX11 -lm
@@ -27,10 +28,10 @@ LIBS_DIRS = $(addprefix -L, $(dir $(LIBS_FILES)))
 all: $(NAME)
 
 $(NAME): $(OFILES) $(LIBS_FILES)
-	gcc $(LIBS_DIRS) $(SAN_FLAGS) $(OFILES) $(LIBS) -o $@
+	$(CC) $(LIBS_DIRS) $(SAN_FLAGS) $(OFILES) $(LIBS) -o $@
 
 $(OFILES): %.o: %.c $(HFILES)
-	gcc $(CFLAGS) $(SAN_FLAGS) $(OPTIM) $(INC) -c $< -o $@
+	$(CC) $(CFLAGS) $(SAN_FLAGS) $(OPTIM) $(INC) -c $< -o $@
 
 $(LIBS_FILES): FORCE
 	make -C $(dir $@)
