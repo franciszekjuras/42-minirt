@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_parameters.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjuras <fjuras@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: jkarosas <jkarosas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:06:11 by jkarosas          #+#    #+#             */
-/*   Updated: 2023/01/27 16:25:36 by fjuras           ###   ########.fr       */
+/*   Updated: 2023/01/28 15:45:33 by jkarosas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	parse_orientation(t_v3 *point, char *line)
 		|| orientation_check(split))
 	{
 		return (cleanup_split(split,
-				"Orientation vector values have to be in range [-1,1]"));
+				"Invalid orientation vector value"));
 	}
 	if (point->x == 0. && point->y == 0. && point->z == 0.)
 		return (cleanup_split(split, "Orientation vector must be non-zero"));
